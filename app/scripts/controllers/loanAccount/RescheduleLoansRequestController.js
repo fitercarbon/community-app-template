@@ -4,13 +4,17 @@
             scope.loanId = routeParams.loanId;
             scope.formData = {};
             scope.rejectData = {};
+            scope.adjustFuturePayments = true;
             scope.formData.submittedOnDate = new Date();
 
-            resourceFactory.loanRescheduleResource.template({scheduleId:'template'},function(data){
+            resourceFactory.loanRescheduleResource.template({scheduleId:'template', loanId:scope.loanId},function(data){
                 if (data.length > 0) {
                     scope.formData.rescheduleReasonId = data.rescheduleReasons[0].id;
                 }
                 scope.codes = data.rescheduleReasons;
+                let transactionDate = data.loanTransactionData.date;
+                scope.adjustFuturePayments = data.adjustFuturePayments;
+                scope.formData.rescheduleFromDate =new Date(transactionDate) || new Date();
             });
             scope.cancel = function () {
                 location.path('/viewloanaccount/' + scope.loanId);

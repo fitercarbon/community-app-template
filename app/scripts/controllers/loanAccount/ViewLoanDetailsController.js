@@ -86,6 +86,10 @@
                     case "writeoff":
                         location.path('/loanaccount/' + accountId + '/writeoff');
                         break;
+                    case "payoff":
+                        location.path('/loanaccount/' + accountId + '/payoff');
+                        break;
+
                     case "recoverypayment":
                         location.path('/loanaccount/' + accountId + '/recoverypayment');
                         break;
@@ -329,6 +333,11 @@
                             {
                                 name: "button.writeoff",
                                 taskPermissionName: 'WRITEOFF_LOAN'
+                            },
+
+                            {
+                                name: "button.payoff",
+                                taskPermissionName: 'PAY_OFF_LOAN'
                             },
                             {
                                 name: "button.close-rescheduled",

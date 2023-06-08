@@ -526,7 +526,7 @@
                     loanRescheduleResource: defineResource(apiVer + "/rescheduleloans/:scheduleId",{scheduleId:'@scheduleId', command: '@command'},{
                      get: {method: 'GET',params:{}},
                      getAll: {method: 'GET', params: {}, isArray: true},
-                     template: {method: 'GET',params:{}},
+                     template: {method: 'GET',params:{loanId:'@loanId'}},
                      preview:{method:'GET',params:{command:'previewLoanReschedule'}},
                      put: {method: 'POST', params: {command:'reschedule'}},
                      reject:{method:'POST',params:{command:'reject'}},
