@@ -283,6 +283,20 @@
                     scope.taskPermissionName = 'WRITEOFF_LOAN';
                     scope.fetchEntities('m_loan','WRITE_OFF');
                     break;
+
+                case "payoff":
+                    scope.modelName = 'transactionDate';
+                    resourceFactory.loanTrxnsTemplateResource.get({loanId: scope.accountId, command: 'payoff'}, function (data) {
+                        scope.formData[scope.modelName] = new Date(data.date) || new Date();
+                        scope.writeOffAmount = data.amount;
+                        scope.formData.transactionAmount = data.amount;
+                        scope.isLoanWriteOff = true;
+                    });
+                    scope.title = 'label.heading.payoffloanaccount';
+                    scope.labelName = 'label.input.payoffondate';
+                    scope.taskPermissionName = 'PAY_OFF_LOAN';
+                    scope.fetchEntities('m_loan','PAY_OFF');
+                    break;
                 case "close-rescheduled":
                     scope.modelName = 'transactionDate';
                     resourceFactory.loanTrxnsTemplateResource.get({loanId: scope.accountId, command: 'close-rescheduled'}, function (data) {
@@ -532,7 +546,7 @@
                     this.formData.locale = scope.optlang.code;
                     this.formData.dateFormat = scope.df;
                 }
-                if (scope.action == "repayment" || scope.action == "waiveinterest" || scope.action == "writeoff" || scope.action == "close-rescheduled"
+                if (scope.action == "repayment" || scope.action == "waiveinterest" || scope.action == "payoff" || scope.action == "writeoff" || scope.action == "close-rescheduled"
                     || scope.action == "close" || scope.action == "modifytransaction" || scope.action == "recoverypayment" || scope.action == "prepayloan") {
                     if (scope.action == "modifytransaction") {
                         params.command = 'modify';

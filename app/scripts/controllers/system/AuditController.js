@@ -117,6 +117,12 @@
                 } else
                     scope.searchCriteria.audit[9] = null;
 
+                if (scope.formData.clientId) {
+                       params.clientId = scope.formData.clientId;
+                       scope.searchCriteria.audit[10] = params.clientId;
+                   } else
+                       scope.searchCriteria.audit[10] = null;
+
                 scope.saveSC();
                 resourceFactory.auditResource.search(params, function (data) {
                     scope.searchData.pageItems = data.pageItems;
@@ -149,6 +155,7 @@
                 scope.date.second = null;
                 scope.date.fourth = null;
                 scope.formData.entity = "";
+                scope.formData.clientId = null;
                 scope.formData.checkedBy = "";
             };
 
