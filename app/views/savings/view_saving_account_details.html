@@ -551,6 +551,9 @@
                                     {{'label.heading.balance' | translate}}
                                 </th>
                                 <th class="pointer" ng-click="changeTransactionSort('runningBalance')">
+                                    {{'label.heading.doneBy' | translate}}
+                                </th>
+                                <th class="pointer" ng-click="changeTransactionSort('runningBalance')">
                                     {{'label.heading.viewreceipts' | translate}}
                                 </th>
                             </tr>
@@ -595,6 +598,10 @@
                                 <td class="pointer"
                                     data-ng-click="routeTo(transaction.accountId,transaction.id,transaction.transfer,transaction.transfer.id,transaction.transactionType.value)">
                                     {{transaction.runningBalance| number}}
+                                </td>
+                                <td class="pointer"
+                                    data-ng-click="routeTo(transaction.accountId,transaction.id,transaction.transfer,transaction.transfer.id,transaction.transactionType.value)">
+                                    {{transaction.submittedByUsername}}
                                 </td>
                                 <td><span ng-if=" transaction.reversed!=true"
                                        ng-click="viewSavingsTransactionReceipts(transaction.id)">

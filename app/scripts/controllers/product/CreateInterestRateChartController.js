@@ -36,7 +36,7 @@
             scope.addNewRow = function () {
                 var fromPeriod = '';
                 var amountRangeFrom = '';
-                var periodType = '';
+                var periodType = {};
                 var toPeriod = '';
                 var amountRangeTo = '';
                 if (_.isNull(scope.chart.chartSlabs) || _.isUndefined(scope.chart.chartSlabs)) {

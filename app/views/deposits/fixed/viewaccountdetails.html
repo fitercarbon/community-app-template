@@ -352,6 +352,7 @@
                             <th>{{'label.heading.debit' | translate}}</th>
                             <th>{{'label.heading.credit' | translate}}</th>
                             <th>{{'label.heading.balance' | translate}}</th>
+                            <th>{{'label.heading.doneBy' | translate}}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -385,6 +386,10 @@
                             <td class="pointer"
                                 data-ng-click="routeTo(transaction.accountId,transaction.id,transaction.transfer,transaction.transfer.id)">
                                 {{transaction.runningBalance | number}}
+                            </td>
+                            <td class="pointer"
+                                data-ng-click="routeTo(transaction.accountId,transaction.id,transaction.transfer,transaction.transfer.id)">
+                                {{transaction.submittedByUsername}}
                             </td>
                         </tbody>
                     </table>
