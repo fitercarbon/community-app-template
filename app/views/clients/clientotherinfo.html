@@ -1,0 +1,119 @@
+<div class="content-container" ng-controller="ClientOtherInfoController">
+    <ul class="breadcrumb">
+        <li><a href="#/clients">{{'label.anchor.clients' | translate}}</a></li>
+        <li><a href='#/viewclient/{{clientId}}'>{{'label.anchor.viewclient' | translate}}</a></li>
+        <li class="active">{{'label.anchor.clientOtherInfo' | translate}}</li>
+    </ul>
+    <div class="card" ng-if="!exists">
+        <div class="content">
+        <div class="toolbar">
+            <h4>{{ 'label.heading.clientOtherInfo' | translate }}</h4>
+        </div>
+        <br/>
+        <form name="clientotherinfoform" class="form-horizontal" rc-submit="submit()" >
+            <api-validate></api-validate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="strataId">{{ 'label.input.strata' | translate }}
+                        <span class="required">*</span></label>
+
+                    <div class="col-sm-3">
+                        <select chosen="strataOptions" id="strataId" name = "strataId" ng-model="formData.strataId" class="form-control"
+                                ng-options="strata.id as strata.name for strata in strataOptions"
+                                value="{{strata.id}}" required></select>
+                    </div>
+                    <form-validate valattributeform="clientotherinfoform" valattribute="strataId"/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="nationalityId">{{ 'label.input.nationality' | translate }}
+                        <span class="required">*</span></label>
+
+                    <div class="col-sm-3">
+                        <select chosen="nationalityOptions" id="nationalityId" name="nationalityId" ng-model="formData.nationalityId" class="form-control"
+                                ng-options="nationality.id as nationality.name for nationality in nationalityOptions"
+                                value="{{nationality.id}}" required></select>
+                    </div>
+                    <form-validate valattributeform="clientotherinfoform" valattribute="nationalityId"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="numberOfChildren">{{ 'label.input.numberOfChildren' | translate }}
+                            </label>
+
+                    <div class="col-sm-3">
+                        <input id="numberOfChildren" name="numberOfChildren" type="text" class="form-control" ng-model="formData.numberOfChildren" late-validate>
+                    </div>
+                
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="numberOfDependent">{{ 'label.input.numberOfDependent' | translate }}
+                    </label>
+
+                    <div class="col-sm-3">
+                        <input id="numberOfDependent" name="numberOfDependent" type="text" class="form-control" ng-model="formData.numberOfDependents" late-validate>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="yearArrivedInHostCountryId">{{ 'label.input.yearArrivedInHostCountry' | translate }}
+                        <span class="required">*</span></label>
+
+                    <div class="col-sm-3">
+                        <select chosen="yearArrivedInHostCountryOptions" id="yearArrivedInHostCountryId" name="yearArrivedInHostCountryId" ng-model="formData.yearArrivedInHostCountryId" class="form-control"
+                                ng-options="yearArrivedInHostCountry.id as yearArrivedInHostCountry.name for yearArrivedInHostCountry in yearArrivedInHostCountryOptions"
+                                value="{{yearArrivedInHostCountry.id}}" required></select>
+                    </div>
+                    <form-validate valattributeform="clientotherinfoform" valattribute="yearArrivedInHostCountryId"/>
+                </div>
+                <div class="col-md-offset-3">
+                    <button id="cancel" type="reset" class="btn btn-default" ng-click="cancel()">{{ 'label.button.cancel' | translate
+                        }}
+                    </button>
+                    <button id="save" type="submit" has-permission='CREATE_CLIENTOTHERINFO' class="btn btn-primary">{{ 'label.button.save' | translate }}</button>
+                </div>
+
+            </fieldset>
+        </form> 
+        </div>
+    </div>
+    <div class="card well" ng-if="exists">
+        <div class="toolbar">
+            <h4>Client Other Info</h4>
+        </div>
+        <div class="pull-right">
+            <div class="form-group">
+                <a href="#/editclientOtherInfo/{{clientId}}/{{otherInfoData.id}}" class="btn btn-primary" has-permission='UPDATE_CLIENTOTHERINFO'><i class="fa fa-edit "></i>
+                    {{'label.button.edit' | translate}}</a>
+            </div>
+        </div>
+        <div class="row" >
+            <div class="col-md-6">
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <td>{{'label.heading.strata' | translate}}</td>
+                        <td>{{otherInfoData.strata.name}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{'label.heading.nationality' | translate}}</td>
+                        <td>{{otherInfoData.nationality.name}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{'label.heading.numberOfChildren' | translate}}</td>
+                        <td>{{otherInfoData.numberOfChildren}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{'label.heading.numberOfDependent' | translate}}</td>
+                        <td>{{otherInfoData.numberOfDependents}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{'label.heading.yearArrivedInHostCountry' | translate}}</td>
+                        <td>{{otherInfoData.yearArrivedInHostCountry.name}}</td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

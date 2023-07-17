@@ -285,6 +285,12 @@
 										<li class="{{button.icon}}">
 											<a href="#/selfservice/createuser/{{client.id}}">{{'label.createselfserviceuser' | translate}}</a>
 										</li>
+										<li data-ng-show="client.status.value=='Active' && client.legalForm.id==1">
+											<a href="#/clientOtherInfo/{{client.id}}" has-permission='READ_CLIENTOTHERINFO'>{{'label.button.clientOtherInfo' | translate}}</a>
+										</li>
+										<li data-ng-show="client.status.value=='Active' && client.legalForm.id==2">
+											<a href="#/clientOtherInfoEntity/{{client.id}}" has-permission='READ_CLIENTOTHERINFO'>{{'label.button.clientOtherInfoCompany' | translate}}</a>
+										</li>
 									</ul>
 								</span>
 						</div>
@@ -559,6 +565,31 @@
 										<td class="pointer center" data-ng-click="routeToCollateral(collateral.id)">{{collateral.totalCollateral}}</td>
 									</tr>
 								</table>
+								</div>
+								<!-- Business Details Overview -->
+								<div data-ng-show="businessDetailSize != 0">
+									<div class="span gray-head">
+										<span class="boldlabel">
+											<strong>{{'label.heading.businessdetails' | translate }}</strong>
+										</span>
+									</div>
+									<table class="table table-condensed">
+										<tr class="graybg">
+											<th>{{'label.heading.id' | translate}}</th>
+											<th>{{'label.heading.businessType' | translate}}</th>
+											<th>{{'label.heading.externalid' | translate}}</th>
+											<th>{{'label.heading.sourceOfCapital' | translate}}</th>
+											<th>{{'label.heading.totalEmployee' | translate}}</th>
+										</tr>
+										<tr class="pointer-main"
+											ng-repeat="detail in businessDetails">
+											<td class="pointer" data-ng-click="routeToBusinessDetail(detail.id)">{{detail.id}}</td>
+											<td class="pointer" data-ng-click="routeToBusinessDetail(detail.id)">{{detail.businessTypeId.name}}</td>
+											<td class="pointer" data-ng-click="routeToBusinessDetail(detail.id)">{{detail.externalId}}</td>
+											<td class="pointer" data-ng-click="routeToBusinessDetail(detail.id)">{{detail.businessTypeId.name}}</td>
+											<td class="pointer center" data-ng-click="routeToBusinessDetail(detail.id)">{{detail.totalEmployee}}</td>
+										</tr>
+									</table>
 								</div>
                                 <!-- Fixed deposits overview -->
                                 <div data-ng-show="showFixed">
@@ -1060,6 +1091,76 @@
 						</table>
 
 					</div>
+					<!--</fieldset>-->
+
+				</uib-tab>
+
+				<!-- HouseholdExpen -->
+				<uib-tab  heading="{{'label.heading.householdexpenses' | translate}}" >
+
+					<div ng-show="!expensesData || !expensesData.id">
+						<button class="btn btn-primary pull-right" ng-click="addExpenses()"><i class="icon-plus icon-white"></i>{{'label.button.addExpenses' | translate}}</button>
+						<br>
+					</div>
+
+					<div ng-show="expensesData && expensesData.id">
+						<div class="card">
+							<div class="content">
+								<div class="pull-right">
+									<div class="btn-group">
+										<a href="#/editExpenses/{{expensesData.clientId}}" class="btn btn-primary" has-permission='UPDATE_HOUSEHOLD_EXPENSES'><i
+												class="fa fa-edit "></i>&nbsp;&nbsp;{{'label.button.updateExpenses' | translate}}</a>
+										<button class="btn btn-danger " ng-click="deleteExpenses(expensesData.id)">{{'label.button.deleteExpenses' | translate}}</button>
+									</div>
+								</div>
+
+								<table width="100%">
+									<tr class="bottomborder">
+										<td colspan="4">
+											<strong>{{'label.heading.householdexpenses' | translate}}</strong>
+										</td>
+									</tr>
+									<tr class="toppadding" ng-show="expensesData.foodExpensesAmount">
+										<td>{{'label.input.foodexpensesamount' | translate}} :</td>
+										<td colspan="3">{{expensesData.foodExpensesAmount}}</td>
+									</tr>
+									<tr class="toppadding" ng-show="expensesData.schoolFessAmount">
+										<td>{{'label.input.schoolexpensesamount' | translate}} :</td>
+										<td colspan="3">{{expensesData.schoolFessAmount}}</td>
+									</tr>
+
+									<tr class="toppadding" ng-show="expensesData.rentAmount">
+										<td>{{'label.input.rentexpensesamount' | translate}} :</td>
+										<td colspan="3">{{expensesData.rentAmount}}</td>
+									</tr>
+
+									<tr class="toppadding" ng-show="expensesData.utilitiesAmount">
+										<td>{{'label.input.utilitiesexpensesamount' | translate}} :</td>
+										<td colspan="3">{{expensesData.utilitiesAmount}}</td>
+									</tr>
+
+							</table>
+								<br>
+								<div>
+									<table class=""  ng-show="otherExpensesList.length>0">
+										<tr class="graybg">
+											<th>{{'label.heading.otherexpenses' | translate}}</th>
+											<th>{{'label.heading.otherexpensesamount' | translate}}</th>
+										</tr>
+										<tr ng-repeat="otherExpenses in otherExpensesList">
+											<td>
+												<input type="text" class="form-control" ng-model="otherExpenses.otherExpense.name" readonly>
+											</td>
+											<td>
+												<input id="{{expenses[$index].amount}}" type="text" class="form-control" ng-model="otherExpenses.amount" readonly>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+
 					<!--</fieldset>-->
 
 				</uib-tab>

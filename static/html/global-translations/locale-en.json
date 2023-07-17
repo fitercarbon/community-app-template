@@ -189,6 +189,7 @@
   "label.heading.templateparameters": "Available Template Parameters",
   "label.heading.businessRule": "Business Rule",
   "label.heading.campaignMessage": "Campaign Message",
+  "label.heading.doneBy": "Done By",
   "#Menu Links": "..",
   "label.menu.selectloanofficer": "Select Staff",
   "label.menu.selectone": "Select One",

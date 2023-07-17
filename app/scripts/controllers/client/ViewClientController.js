@@ -19,6 +19,8 @@
             scope.legalform = 'm_client';
 
             scope.collaterals = [];
+            scope.businessDetails = [];
+            scope.isClientBusinessDetailEnabled = false;
 
 
             // address
@@ -72,6 +74,12 @@
 
 
                 })*/
+                resourceFactory.clientExpensesTemplateResource.getOtherExpenses({clientId: routeParams.id}, function(data) {
+                                          scope.expenses=data.otherExpenses;
+                                          scope.expensesData=data
+                                          scope.otherExpensesList=data.otherExpensesData
+                                            });
+            scope.isClientBusinessDetailEnabled = data.isClientBusinessDetailEnabled;
 
             });
 
@@ -177,6 +185,10 @@
                 location.path('/viewclient/'+ routeParams.id +'/viewallclientcollaterals');
             }
 
+            scope.viewBusinessDetails=function() {
+                location.path('/viewclient/'+ routeParams.id +'/viewallbusinessdetails');
+            }
+
             scope.editFamilyMember=function(clientFamilyMemberId)
             {
 
@@ -252,11 +264,19 @@
                 location.path('/viewclient/' + routeParams.id + '/viewclientcollateral/' + id);
             }
 
+            scope.routeToBusinessDetail = function(id) {
+                location.path('/viewclient/' + routeParams.id + '/viewbusinessdetail/' + id);
+            }
+
             scope.haveFile = [];
             resourceFactory.clientResource.get({clientId: routeParams.id}, function (data) {
                 scope.client = data;
                 scope.collaterals = scope.client.clientCollateralManagements;
                 scope.collateralSize = scope.collaterals.length;
+                //business-Details
+                scope.businessDetails = scope.client.clientBusinessDetailDataSet;
+                scope.businessDetailSize = scope.businessDetails.length;
+
                 scope.isClosedClient = scope.client.status.value == 'Closed';
                 scope.staffData.staffId = data.staffId;
                 if (data.imagePresent) {
@@ -337,6 +357,15 @@
                     }
                     else {
                         scope.buttons.push(clientStatus.getStatus("Assign Staff"));
+                    }
+                    if(scope.isClientBusinessDetailEnabled){
+                    scope.buttons.push(
+                    {
+                        name: "label.button.addbusinessdetail",
+                        href: "#/addbusinessdetail",
+                        icon: "fa fa-plus",
+                        taskPermissionName: "CREATE_CLIENTBUSINESSDETAIL"
+                    })
                     }
                 }
 
