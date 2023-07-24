@@ -76,8 +76,17 @@
         <td class="paddedbottom10">
             <input type="text" id="externalId" name="externalId" ng-model="formData.externalId" class="form-control"/>
         </td>
-        <td></td>
-        <td></td>
+        <td class="width14">
+            <label>{{ 'label.input.department' | translate }}</label>
+            <i class="fa fa-question-circle" uib-tooltip="{{'label.tooltip.department' | translate}}"></i>
+        </td>
+        <td class="paddedbottom20 width36">
+            <select id="department" ng-model="formData.department" class="form-control"
+                    ng-options="dept.id as dept.name for dept in loanaccountinfo.departmentOptions"
+                    value="{{dept.id}}" required >
+                <option value="">--{{'label.menu.department' | translate}}--</option>
+            </select>
+        </td>
     </tr>
 </table>
 

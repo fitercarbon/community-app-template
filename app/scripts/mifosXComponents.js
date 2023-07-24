@@ -76,6 +76,8 @@ define(['Q', 'underscore', 'mifosX'], function (Q) {
             'client/EditClientOtherInfoController',
             'client/ClientOtherInfoEntityController',
             'client/EditClientOtherInfoEntityController',
+            'client/ClientRecruitmentSurveyController',
+            'client/EditClientRecruitmentSurveyController',
             'product/LoanProductController',
             'product/CreateLoanProductController',
             'product/CreateSavingProductController',

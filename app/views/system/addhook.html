@@ -52,6 +52,8 @@
                             <input ng-switch-when="string" type="text" id="{{s.fieldName}}" name="{{s.fieldName}}" class="form-control" ng-model="schemaInputs[$index]" placeholder="{{s.placeholder}}" ng-required="{{!s.optional}}" late-validate/>
                             <input ng-switch-when="password" type="password" id="{{s.fieldName}}" name="{{s.fieldName}}" class="form-control" ng-model="schemaInputs[$index]" placeholder="{{s.placeholder}}" ng-required="{{!s.optional}}" late-validate/>
                             <input ng-switch-when="boolean" type="checkbox" id="{{s.fieldName}}" name="{{s.fieldName}}" class="form-control" ng-model="schemaInputs[$index]" placeholder="{{s.placeholder}}" ng-required="{{!s.optional}}" late-validate/>
+                            <textarea ng-switch-when="text" type="text" id="{{s.fieldName}}" name="{{s.fieldName}}" class="form-control" ng-model="schemaInputs[$index]" placeholder="{{s.placeholder}}" ng-required="{{!s.optional}}" late-validate></textarea>
+
                         </div>
 
                     </div>

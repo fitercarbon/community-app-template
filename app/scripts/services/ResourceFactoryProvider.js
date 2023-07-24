@@ -105,6 +105,16 @@
                     otherInfoEntityResource: defineResource(apiVer + "/clients/:clientId/otherInfo/entity/:otherInfoId", {clientId: '@clientId', otherInfoId: '@otherInfoId'}, {
                           get: {method: 'GET', params: {}},
                     }),
+                    clientRecruitmentSurveyTemplateResource: defineResource(apiVer + "/clients/:clientId/recruitmentSurvey/template", {clientId: '@clientId'}, {
+                          get: {method: 'GET', params: {}}
+                    }),
+                    clientRecruitmentSurveyResource: defineResource(apiVer + "/clients/:clientId/recruitmentSurvey/:surveyId", {clientId: '@clientId', surveyId: '@surveyId'}, {
+                          get: {method: 'GET', params: {}},
+                          put: {method: 'PUT', params: {}},
+                    }),
+                    recruitmentSurveyResource: defineResource(apiVer + "/clients/:clientId/recruitmentSurvey", {clientId: '@clientId'}, {
+                          getAll: {method: 'GET', params: {}, isArray: true},
+                    }),
                     surveyResource: defineResource(apiVer + "/surveys/:surveyId", {surveyId: '@surveyId'}, {
                         getAll: {method: 'GET', params: {}, isArray: true},
                         get: {method: 'GET', params: {surveyId: '@surveyId'}, isArray: false},

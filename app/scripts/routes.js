@@ -157,6 +157,12 @@
             .when('/editclientOtherInfoEntity/:clientId/:otherInfoId', {
                  templateUrl: 'views/clients/editclientotherinfoentity.html'
             })
+            .when('/clientRecruitmentSurvey/:clientId', {
+                 templateUrl: 'views/clients/clientrecruitmentsurvey.html'
+            })
+            .when('/editclientRecruitmentSurvey/:clientId/:surveyId', {
+                 templateUrl: 'views/clients/editclientrecruitmentsurvey.html'
+            })
             .when('/newclientloanaccount/:clientId', {
                 templateUrl: 'views/loans/newloanaccount.html'
             })

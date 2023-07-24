@@ -80,6 +80,8 @@
                                           scope.otherExpensesList=data.otherExpensesData
                                             });
             scope.isClientBusinessDetailEnabled = data.isClientBusinessDetailEnabled;
+            scope.isClientOtherInfoEnabled = data.isClientOtherInfoEnabled;
+            scope.isClientRecruitmentSurveyEnabled = data.isClientRecruitmentSurveyEnabled;
 
             });
 
