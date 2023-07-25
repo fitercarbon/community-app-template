@@ -48,6 +48,7 @@
                 scope.formData.loanOfficerId = data.loanOfficerId;
                 scope.formData.loanPurposeId = data.loanPurposeId;
                 scope.formData.externalId = data.externalId;
+                scope.formData.department = data.department.id
 
                 //update collaterals
                 resourceFactory.clientcollateralTemplateResource.getAllCollaterals({clientId: scope.clientId}, function(data) {

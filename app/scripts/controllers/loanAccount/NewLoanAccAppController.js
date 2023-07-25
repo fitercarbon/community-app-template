@@ -63,7 +63,7 @@
 
             resourceFactory.loanResource.get(scope.inparams, function (data) {
                 scope.products = data.productOptions;
-                console.log(scope.products);
+
                 scope.ratesEnabled = data.isRatesEnabled;
 
                 if (data.clientName) {
@@ -75,8 +75,6 @@
             });
 
             scope.loanProductChange = function (loanProductId) {
-                // _.isUndefined(scope.datatables) ? scope.tempDataTables = [] : scope.tempDataTables = scope.datatables;
-                // WizardHandler.wizard().removeSteps(1, scope.tempDataTables.length);
                 scope.inparams.productId = loanProductId;
                 resourceFactory.clientcollateralTemplateResource.getAllCollaterals({clientId: scope.clientId, prodId: loanProductId}, function(data) {
                         scope.collateralsData = data;
