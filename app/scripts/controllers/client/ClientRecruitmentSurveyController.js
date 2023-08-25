@@ -1,6 +1,6 @@
 (function (module) {
     mifosX.controllers = _.extend(module, {
-        ClientRecruitmentSurveyController: function (scope, resourceFactory, routeParams, location, dateFilter) {
+        ClientRecruitmentSurveyController: function (scope, resourceFactory, routeParams, location, dateFilter, route) {
 
             scope.formData = {};
             scope.clientId = routeParams.clientId;
@@ -32,13 +32,13 @@
                 this.formData.endDate = dateFilter(scope.formData.endDate, scope.df);
 
                 resourceFactory.clientRecruitmentSurveyResource.save({clientId: scope.clientId}, this.formData, function (data) {
-                    location.path('/viewclient/' + scope.clientId);
+                    route.reload();
                 });
             };
 
         }
     });
-    mifosX.ng.application.controller('ClientRecruitmentSurveyController', ['$scope', 'ResourceFactory', '$routeParams', '$location', 'dateFilter', mifosX.controllers.ClientRecruitmentSurveyController]).run(function ($log) {
+    mifosX.ng.application.controller('ClientRecruitmentSurveyController', ['$scope', 'ResourceFactory', '$routeParams', '$location', 'dateFilter', '$route', mifosX.controllers.ClientRecruitmentSurveyController]).run(function ($log) {
         $log.info("ClientRecruitmentSurveyController initialized");
     });
 }(mifosX.controllers || {}));

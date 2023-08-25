@@ -283,13 +283,32 @@
 							            <tbody>
 								            <tr class="pointer-main"
 								                ng-repeat="loanaccount in groupAccounts.loanAccounts | orderBy:'productName':reverse | filter:isLoanNotClosed">
-								                <td class="pointer" data-ng-click="routeToLoan(loanaccount.id)">
-								                	<i ng-hide="loanaccount.inArrears" tooltip-placement="right" uib-tooltip="{{loanaccount.status.value}}"
-								                    	class="fa fa-stop {{loanaccount.status.code | StatusLookup}}"></i>
-								                    <i ng-show="loanaccount.inArrears" tooltip-placement="right" uib-tooltip="{{loanaccount.status.value}}"
-								                     	class="fa fa-stop {{loanaccount.status.code | StatusLookup}}overdue"></i>
-								                	{{loanaccount.accountNo}}
-								                </td>
+
+												<td class="pointer" data-ng-click="routeToLoan(loanaccount.id)" ng-hide="groupAccounts.isExtendLoanLifeCycleConfig">
+													<i ng-hide="loanaccount.inArrears" uib-tooltip-placement="right" uib-tooltip="{{loanaccount.status.value}}"
+													   class="fa fa-stop {{loanaccount.status.code | StatusLookup}}"></i>
+													<i ng-show="loanaccount.inArrears" uib-tooltip-placement="right" uib-tooltip="{{loanaccount.status.value}}"
+													   class="fa fa-stop {{loanaccount.status.code | StatusLookup}}overdue"></i>
+													{{loanaccount.accountNo}}
+												</td>
+
+												<td class="pointer" data-ng-click="routeToLoan(loanaccount.id)" ng-show="groupAccounts.isExtendLoanLifeCycleConfig">
+
+													<i ng-show="(!loanaccount.inArrears && groupAccounts.isExtendLoanLifeCycleConfig && loanaccount.loanDecisionState == null) ||
+													(!loanaccount.inArrears && groupAccounts.isExtendLoanLifeCycleConfig && loanaccount.loanDecisionState != null && loanaccount.loanDecisionState.value == 'PREPARE_AND_SIGN_CONTRACT')||
+												    (!loanaccount.inArrears && groupAccounts.isExtendLoanLifeCycleConfig && loanaccount.loanDecisionState != null && loanaccount.loanDecisionState.value != 'PREPARE_AND_SIGN_CONTRACT' && loanaccount.status.code != 'loanStatusType.submitted.and.pending.approval')"
+													   uib-tooltip-placement="right" uib-tooltip="{{loanaccount.status.value}}"
+													   class="fa fa-stop {{loanaccount.status.code | StatusLookup}}"></i>
+
+													<i ng-show="!loanaccount.inArrears && groupAccounts.isExtendLoanLifeCycleConfig && loanaccount.loanDecisionState != null && loanaccount.loanDecisionState.value != 'PREPARE_AND_SIGN_CONTRACT' && loanaccount.status.code == 'loanStatusType.submitted.and.pending.approval'"
+													   uib-tooltip-placement="right" uib-tooltip="{{loanaccount.loanDecisionState.value}}"
+													   class="fa fa-stop {{loanaccount.loanDecisionState.code | StatusLookup}}"></i>
+
+													<i ng-show="loanaccount.inArrears" uib-tooltip-placement="right" uib-tooltip="{{loanaccount.status.value}}"
+													   class="fa fa-stop {{loanaccount.status.code | StatusLookup}}overdue"></i>
+													{{loanaccount.accountNo}}
+												</td>
+
 								                <td class="pointer" data-ng-click="routeToLoan(loanaccount.id)"> {{loanaccount.productName}}</td>
 												<td class="pointer center" data-ng-click="routeToLoan(loanaccount.id)" ng-if="loanaccount.loanType.value == 'Individual'">
 								                	<i uib-tooltip="{{loanaccount.loanType.value}}" class="fa fa-user fa fa-large"></i>

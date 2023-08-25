@@ -1,3 +1,4 @@
+
 (function (module) {
     mifosX.controllers = _.extend(module, {
         ViewAllClientCollateralController: function (scope, resourceFactory, routeParams, location) {

@@ -22,11 +22,10 @@
                       numberOfDependents: data.numberOfDependents,
                       numberOfChildren: data.numberOfChildren
                 }
-                console.log(scope.otherInfoData);
             });
 
             scope.cancel = function () {
-                location.path('/viewclient/' + scope.clientId);
+                location.path('/clientOtherInfo/' + scope.clientId);
             };
 
             scope.submit = function () {
@@ -34,7 +33,7 @@
                 this.formData.dateFormat = scope.df;
 
                 resourceFactory.otherInfoResource.put({clientId: scope.clientId, otherInfoId: routeParams.otherInfoId}, this.formData, function (data) {
-                    location.path('/viewclient/' + scope.clientId);
+                    location.path('/clientOtherInfo/' + scope.clientId);
                 });
             };
 

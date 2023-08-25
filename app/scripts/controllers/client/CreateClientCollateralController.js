@@ -8,6 +8,9 @@
             scope.disable = true;
             scope.collateralDataRequestBody = {};
             scope.collateralId;
+            scope.additionalCollateralDetailsEnabled = false;
+            scope.additionalDetailsAddOrRemove = false;
+            scope.additionalDetails = {};
 
             scope.updateValues = function () {
                 scope.formData.quantity = scope.formData.quantity * 1.0;
@@ -36,6 +39,37 @@
             resourceFactory.collateralResource.getAllCollaterals(function (data) {
                 scope.collaterals = data;
             });
+            resourceFactory.clientAdditionalCollateralTemplateResource.get({clientId: scope.clientId}, function (data) {
+                scope.provinceOptions = data.provinces;
+                scope.districtOptions = data.districts;
+                scope.sectorOptions = data.sectors;
+                scope.villageOptions = data.villages;
+                scope.cellOptions = data.cells;
+            });
+            resourceFactory.configurationResourceByName.get({name:'Enable-Client-Collateral-Addition_Details'},function (data) {
+                scope.additionalCollateralDetailsEnabled = data.enabled;
+            });
+
+            scope.addAdditionalDetails = function () {
+               scope.additionalDetailsAddOrRemove =  scope.additionalDetailsAddOrRemove == true ? false : true;
+               scope.additionalDetails = {};
+            }
+            scope.createAdditionalDetails = function () {
+             if(scope.additionalDetailsAddOrRemove && scope.additionalCollateralDetailsEnabled){
+                this.formData.upiNo = scope.additionalDetails.upiNo;
+                this.formData.chassisNo = scope.additionalDetails.chassisNo;
+                this.formData.collateralOwnerFirst = scope.additionalDetails.collateralOwnerFirst;
+                this.formData.idNoOfCollateralOwnerFirst = scope.additionalDetails.idNoOfCollateralOwnerFirst;
+                this.formData.collateralOwnerSecond = scope.additionalDetails.collateralOwnerSecond;
+                this.formData.idNoOfCollateralOwnerSecond = scope.additionalDetails.idNoOfCollateralOwnerSecond;
+                this.formData.worthOfCollateral = scope.additionalDetails.worthOfCollateral;
+                this.formData.provinceId = scope.additionalDetails.provinceId;
+                this.formData.districtId = scope.additionalDetails.districtId;
+                this.formData.sectorId = scope.additionalDetails.sectorId;
+                this.formData.villageId = scope.additionalDetails.villageId;
+                this.formData.cellId = scope.additionalDetails.cellId;
+             }
+            }
 
             scope.cancel = function () {
                 location.path('/viewclient/' + scope.clientId);
@@ -51,6 +85,7 @@
                 delete this.formData.unitType;
                 delete this.formData.total;
                 delete this.formData.totalCollateral;
+                scope.createAdditionalDetails();
 
                 resourceFactory.clientcollateralResource.save({clientId: scope.clientId}, this.formData, function (data) {
                     location.path('/viewclient/' + scope.clientId + '/viewclientcollateral/' + data.resourceId);

@@ -34,7 +34,7 @@
             });
 
             scope.cancel = function () {
-                location.path('/viewclient/' + scope.clientId);
+                location.path('/clientRecruitmentSurvey/' + scope.clientId);
             };
 
             scope.submit = function () {
@@ -43,7 +43,7 @@
                 this.formData.startDate = dateFilter(scope.formData.startDate, scope.df);
                 this.formData.endDate = dateFilter(scope.formData.endDate, scope.df);
                 resourceFactory.clientRecruitmentSurveyResource.put({clientId: scope.clientId, surveyId:scope.surveyId}, this.formData, function (data) {
-                    location.path('/viewclient/' + scope.clientId);
+                    location.path('/clientRecruitmentSurvey/' + scope.clientId);
                 });
             };
 
