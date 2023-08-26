@@ -128,6 +128,33 @@
                     case "foreclosure":
                         location.path('loanforeclosure/' + accountId);
                         break;
+                    case "reviewapplication":
+                        location.path('/loanaccount/' + accountId + '/reviewapplication');
+                        break;
+                    case "duediligence":
+                        location.path('/viewloanaccount/' + accountId + '/duediligence');
+                        break;
+                    case "collateralreview":
+                        location.path('/loanaccount/' + accountId + '/collateralreview');
+                        break;
+                    case "icreviewlevelone":
+                        location.path('/loanaccount/' + accountId + '/icreviewlevelone');
+                        break;
+                     case "icreviewleveltwo":
+                         location.path('/loanaccount/' + accountId + '/icreviewleveltwo');
+                         break;
+                     case "icreviewlevelthree":
+                          location.path('/loanaccount/' + accountId + '/icreviewlevelthree');
+                          break;
+                     case "icreviewlevelfour":
+                          location.path('/loanaccount/' + accountId + '/icreviewlevelfour');
+                          break;
+                     case "icreviewlevelfive":
+                          location.path('/loanaccount/' + accountId + '/icreviewlevelfive');
+                          break;
+                      case "prepareandsigncontract":
+                          location.path('/loanaccount/' + accountId + '/prepareandsigncontract');
+                          break;
                 }
             };
 
@@ -190,6 +217,77 @@
                 if (scope.status == "Submitted and pending approval" || scope.status == "Active" || scope.status == "Approved") {
                     scope.choice = true;
                 }
+                function getLoanStage(data) {
+                if((data.isExtendLoanLifeCycleConfig == false)){
+                    return {
+                        name: "button.approve",
+                        icon: "fa fa-check",
+                        taskPermissionName: 'APPROVE_LOAN'
+                    };
+                }else if((data.isExtendLoanLifeCycleConfig == true && (data.loanDecisionState == null || data.loanDecisionState == ""))){
+                return {
+                    name: "button.reviewapplication",
+                    icon: "fa fa-check",
+                    taskPermissionName: 'ACCEPT_LOANAPPLICATIONREVIEW'
+                };
+                }else if((data.isExtendLoanLifeCycleConfig == true && (data.loanDecisionState != null && data.loanDecisionState.value == "REVIEW_APPLICATION"))){
+                return {
+                    name: "button.duediligence",
+                    icon: "fa fa-check",
+                    taskPermissionName: 'ACCEPT_DUEDILIGENCE'
+                };
+                }else if((data.isExtendLoanLifeCycleConfig == true && (data.loanDecisionState != null && data.loanDecisionState.value == "DUE_DILIGENCE"))){
+                 return {
+                     name: "button.collateralreview",
+                     icon: "fa fa-check",
+                     taskPermissionName: 'ACCEPT_LOANCOLLATERALREVIEW'
+                 };
+                 }else if((data.isExtendLoanLifeCycleConfig == true && (data.loanDecisionState != null && data.loanDecisionState.value == "COLLATERAL_REVIEW"))){
+                   return {
+                       name: "button.icreviewlevelone",
+                       icon: "fa fa-check",
+                       taskPermissionName: 'ACCEPT_LOANICREVIEWDECISIONLEVELONE'
+                   };
+                   }else if((data.isExtendLoanLifeCycleConfig == true && (data.loanDecisionState != null && data.loanDecisionState.value == "IC_REVIEW_LEVEL_ONE" && data.nextLoanIcReviewDecisionState.value == "IC_REVIEW_LEVEL_TWO"))){
+                    return {
+                       name: "button.icreviewleveltwo",
+                       icon: "fa fa-check",
+                       taskPermissionName: 'ACCEPT_LOANICREVIEWDECISIONLEVELTWO'
+                   };
+                 }else if((data.isExtendLoanLifeCycleConfig == true && (data.loanDecisionState != null && data.loanDecisionState.value == "IC_REVIEW_LEVEL_TWO" && data.nextLoanIcReviewDecisionState.value == "IC_REVIEW_LEVEL_THREE"))){
+                 return {
+                    name: "button.icreviewlevelthree",
+                    icon: "fa fa-check",
+                    taskPermissionName: 'ACCEPT_LOANICREVIEWDECISIONLEVELTHREE'
+                };
+              }else if((data.isExtendLoanLifeCycleConfig == true && (data.loanDecisionState != null && data.loanDecisionState.value == "IC_REVIEW_LEVEL_THREE" && data.nextLoanIcReviewDecisionState.value == "IC_REVIEW_LEVEL_FOUR"))){
+                return {
+                   name: "button.icreviewlevelfour",
+                   icon: "fa fa-check",
+                   taskPermissionName: 'ACCEPT_LOANICREVIEWDECISIONLEVELFOUR'
+               };
+             }else if((data.isExtendLoanLifeCycleConfig == true && (data.loanDecisionState != null && data.loanDecisionState.value == "IC_REVIEW_LEVEL_FOUR" && data.nextLoanIcReviewDecisionState.value == "IC_REVIEW_LEVEL_FIVE"))){
+              return {
+                 name: "button.icreviewlevelfive",
+                 icon: "fa fa-check",
+                 taskPermissionName: 'ACCEPT_LOANICREVIEWDECISIONLEVELFIVE'
+             };
+           }else if((data.isExtendLoanLifeCycleConfig == true && (data.loanDecisionState != null && data.nextLoanIcReviewDecisionState.value == "PREPARE_AND_SIGN_CONTRACT" && data.loanDecisionState.value != "PREPARE_AND_SIGN_CONTRACT"))){
+              return {
+                 name: "button.prepareandsigncontract",
+                 icon: "fa fa-check",
+                 taskPermissionName: 'ACCEPT_LOANPREPAREANDSIGNCONTRACT'
+             };
+           } else if(((data.isExtendLoanLifeCycleConfig == true) && (data.loanDecisionState != null && data.nextLoanIcReviewDecisionState.value == "PREPARE_AND_SIGN_CONTRACT" && data.loanDecisionState.value == "PREPARE_AND_SIGN_CONTRACT"))){
+            return {
+                name: "button.approve",
+                icon: "fa fa-check",
+                taskPermissionName: 'APPROVE_LOAN'
+            };
+          }else{
+                console.log("No Options Found here . . . . ");
+                }
+                }
                 if (data.status.value == "Submitted and pending approval") {
                     scope.buttons = { singlebuttons: [
                         {
@@ -197,11 +295,7 @@
                             icon: "fa fa-plus",
                             taskPermissionName: 'CREATE_LOANCHARGE'
                         },
-                        {
-                            name: "button.approve",
-                            icon: "fa fa-check",
-                            taskPermissionName: 'APPROVE_LOAN'
-                        },
+                        getLoanStage(data),
                         {
                             name: "button.modifyapplication",
                             icon: "fa fa-pincel-square-o",
@@ -252,7 +346,6 @@
                         }) ;
                     }
                 }
-
                 if (data.status.value == "Approved") {
                     scope.buttons = { singlebuttons: [
                         {
@@ -297,7 +390,6 @@
 
                     };
                 }
-
                 if (data.status.value == "Active") {
                     scope.buttons = { singlebuttons: [
                         {

@@ -60,12 +60,41 @@
         </div>
         <br>
         <div ng-hide="report">
-            <div class="span gray-head" style="margin-left:0%;">
+            <div class="span gray-head" style="margin-left:0%;" ng-hide="loandetails.isExtendLoanLifeCycleConfig">
                       <span style="margin-left: 10px;font-size:24px">
-                            <strong> <i ng-hide="loandetails.inArrears"
+                            <strong>
+
+                                <i ng-hide="loandetails.inArrears"
                                         class="fa fa-stop {{loandetails.status.code | StatusLookup}}"></i>
+
                                 <i ng-show="loandetails.inArrears"
-                                   class="fa fa-stop {{loandetails.status.code | StatusLookup}}overdue"></i>&nbsp;{{loandetails.loanProductName}}(#{{loandetails.accountNo}})</strong>
+                                   class="fa fa-stop {{loandetails.status.code | StatusLookup}}overdue"></i>
+                                &nbsp;{{loandetails.loanProductName}}(#{{loandetails.accountNo}})
+                            </strong>
+                      </span>
+            </div>
+            <div class="span gray-head" style="margin-left:0%;" ng-show="loandetails.isExtendLoanLifeCycleConfig">
+                      <span style="margin-left: 10px;font-size:24px">
+                            <strong>
+
+                                 <i ng-show="(!loandetails.inArrears && loandetails.isExtendLoanLifeCycleConfig && loandetails.loanDecisionState == null) ||
+                                 (!loandetails.inArrears && loandetails.isExtendLoanLifeCycleConfig && loandetails.loanDecisionState != null && loandetails.loanDecisionState.value == 'PREPARE_AND_SIGN_CONTRACT') ||
+                                 (!loandetails.inArrears && loandetails.isExtendLoanLifeCycleConfig && loandetails.loanDecisionState != null && loandetails.loanDecisionState.value != 'PREPARE_AND_SIGN_CONTRACT' && loandetails.status.code != 'loanStatusType.submitted.and.pending.approval')"
+
+                                    class="fa fa-stop {{loandetails.status.code | StatusLookup}}"></i>
+
+
+                                 <i ng-show="!loandetails.inArrears && loandetails.isExtendLoanLifeCycleConfig && loandetails.loanDecisionState != null && loandetails.loanDecisionState.value != 'PREPARE_AND_SIGN_CONTRACT' && loandetails.status.code == 'loanStatusType.submitted.and.pending.approval'"
+                                    class="fa fa-stop {{loandetails.loanDecisionState.code | StatusLookup}}"></i>
+
+
+                                <i ng-show="loandetails.inArrears"
+                                   class="fa fa-stop {{loandetails.status.code | StatusLookup}}overdue"></i>
+
+
+                                &nbsp;{{loandetails.loanProductName}}(#{{loandetails.accountNo}})
+
+                            </strong>
                       </span>
             </div>
             <br>
@@ -1026,6 +1055,48 @@
                                 </table>
                             </div>
                         </div>
+                    </uib-tab>
+                    <uib-tab ng-show="loandetails.loanDueDiligenceData" heading="{{'label.heading.duediligencedetail' | translate}}">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th class="empty"></th>
+                                <th class="empty"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>{{'label.heading.surveyname' |
+                                    translate}}
+                                </td>
+                                <td><span class="padded-td">{{loandetails.loanDueDiligenceData.surveyName}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>{{'label.heading.startdate' | translate}}</td>
+                                <td><span class="padded-td">{{loandetails.loanDueDiligenceData.startDate | DateFormat}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>{{'label.heading.enddate' | translate}}</td>
+                                <td><span class="padded-td">{{loandetails.loanDueDiligenceData.endDate | DateFormat }}</span></td>
+                            </tr>
+                            <tr>
+                                <td>{{'label.heading.surveylocation' | translate}}</td>
+                                <td><span class="padded-td">{{loandetails.loanDueDiligenceData.surveyLocation}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>{{'label.heading.cohort' | translate}}</td>
+                                <td><span class="padded-td">{{loandetails.loanDueDiligenceData.cohort}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>{{'label.heading.program' | translate}}</td>
+                                <td><span class="padded-td">{{loandetails.loanDueDiligenceData.program}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>{{'label.heading.country' | translate}}</td>
+                                <td><span class="padded-td">{{loandetails.loanDueDiligenceData.country}}</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </uib-tab>
                 </uib-tabset>
             </div>

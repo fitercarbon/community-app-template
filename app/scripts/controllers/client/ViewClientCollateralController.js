@@ -6,9 +6,12 @@
             scope.clientId = routeParams.id;
             scope.collateralId = routeParams.collateralId;
             scope.loanTransactions = [];
+            scope.collateral = {};
+            scope.additionalDetails = {};
 
             resourceFactory.clientcollateralResource.get({clientId: scope.clientId, collateralParamId: scope.collateralId}, function (data) {
                 scope.collateral = data;
+                scope.additionalDetails = data.additionalDetails;
                 scope.loanTransactions = scope.collateral.loanTransactionData;
                 for (var i=0; i<scope.loanTransactions.length; i++){
                 	scope.loanTransactions[i].lastRepaymentDate.date = new Date(scope.loanTransactions[i].lastRepaymentDate.date);

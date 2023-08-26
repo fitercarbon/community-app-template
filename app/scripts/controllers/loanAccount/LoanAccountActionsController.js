@@ -8,6 +8,7 @@
             scope.entityformData = {datatables:{}};
             scope.showDateField = true;
             scope.showNoteField = true;
+            scope.noteFieldMandatory = false;
             scope.showAmountField = false;
             scope.restrictDate = new Date();
             // Transaction UI Related
@@ -492,6 +493,102 @@
                     scope.showDateField = false;
                     scope.taskPermissionName = 'UPDATE_DISBURSEMENTDETAIL';
                     break;
+                case "reviewapplication":
+                        scope.taskPermissionName = 'ACCEPT_LOANAPPLICATIONREVIEW';
+                        resourceFactory.loanTemplateResource.get({loanId: scope.accountId, templateType: 'approval'}, function (data) {
+
+                            scope.title = 'label.heading.reviewapplicationloanaccount';
+                            scope.labelName = 'label.input.reviewApplicationOn';
+                            scope.modelName = 'loanReviewOnDate';
+                            scope.formData[scope.modelName] =  new Date();
+                            scope.noteFieldMandatory = true;
+                        });
+
+                        break;
+                case "collateralreview":
+                       scope.taskPermissionName = 'ACCEPT_LOANCOLLATERALREVIEW';
+                       resourceFactory.loanTemplateResource.get({loanId: scope.accountId, templateType: 'approval'}, function (data) {
+
+                           scope.title = 'label.heading.collateralreviewloanaccount';
+                           scope.labelName = 'label.input.collateralReviewOn';
+                           scope.modelName = 'collateralReviewOn';
+                           scope.formData[scope.modelName] =  new Date();
+                           scope.noteFieldMandatory = true;
+                       });
+
+                       break;
+                case "icreviewlevelone":
+                      scope.taskPermissionName = 'ACCEPT_LOANICREVIEWDECISIONLEVELONE';
+                      resourceFactory.loanTemplateResource.get({loanId: scope.accountId, templateType: 'approval'}, function (data) {
+
+                          scope.title = 'label.heading.icreviewleveloneloanaccount';
+                          scope.labelName = 'label.input.icReviewOn';
+                          scope.modelName = 'icReviewOn';
+                          scope.formData[scope.modelName] =  new Date();
+                          scope.noteFieldMandatory = true;
+                      });
+
+                      break;
+                case "icreviewleveltwo":
+                     scope.taskPermissionName = 'ACCEPT_LOANICREVIEWDECISIONLEVELTWO';
+                     resourceFactory.loanTemplateResource.get({loanId: scope.accountId, templateType: 'approval'}, function (data) {
+
+                         scope.title = 'label.heading.icreviewleveltwoloanaccount';
+                         scope.labelName = 'label.input.icReviewOn';
+                         scope.modelName = 'icReviewOn';
+                         scope.formData[scope.modelName] =  new Date();
+                         scope.noteFieldMandatory = true;
+                     });
+
+                     break;
+                case "icreviewlevelthree":
+                      scope.taskPermissionName = 'ACCEPT_LOANICREVIEWDECISIONLEVELTHREE';
+                      resourceFactory.loanTemplateResource.get({loanId: scope.accountId, templateType: 'approval'}, function (data) {
+
+                          scope.title = 'label.heading.icreviewlevelthreeloanaccount';
+                          scope.labelName = 'label.input.icReviewOn';
+                          scope.modelName = 'icReviewOn';
+                          scope.formData[scope.modelName] =  new Date();
+                          scope.noteFieldMandatory = true;
+                      });
+
+                      break;
+                case "icreviewlevelfour":
+                    scope.taskPermissionName = 'ACCEPT_LOANICREVIEWDECISIONLEVELFOUR';
+                    resourceFactory.loanTemplateResource.get({loanId: scope.accountId, templateType: 'approval'}, function (data) {
+
+                        scope.title = 'label.heading.icreviewlevelfourloanaccount';
+                        scope.labelName = 'label.input.icReviewOn';
+                        scope.modelName = 'icReviewOn';
+                        scope.formData[scope.modelName] =  new Date();
+                        scope.noteFieldMandatory = true;
+                    });
+
+                    break;
+                case "icreviewlevelfive":
+                    scope.taskPermissionName = 'ACCEPT_LOANICREVIEWDECISIONLEVELFIVE';
+                    resourceFactory.loanTemplateResource.get({loanId: scope.accountId, templateType: 'approval'}, function (data) {
+
+                        scope.title = 'label.heading.icreviewlevelfiveloanaccount';
+                        scope.labelName = 'label.input.icReviewOn';
+                        scope.modelName = 'icReviewOn';
+                        scope.formData[scope.modelName] =  new Date();
+                        scope.noteFieldMandatory = true;
+                    });
+
+                    break;
+                case "prepareandsigncontract":
+                    scope.taskPermissionName = 'ACCEPT_LOANPREPAREANDSIGNCONTRACT';
+                    resourceFactory.loanTemplateResource.get({loanId: scope.accountId, templateType: 'approval'}, function (data) {
+
+                        scope.title = 'label.heading.prepareandsigncontractloanaccount';
+                        scope.labelName = 'label.input.prepareAndSignContractOn';
+                        scope.modelName = 'icReviewOn';
+                        scope.formData[scope.modelName] =  new Date();
+                        scope.noteFieldMandatory = true;
+                    });
+
+                    break;
             }
 
             scope.cancel = function () {
@@ -617,8 +714,40 @@
                     resourceFactory.LoanAccountResource.delete({loanId: routeParams.id, resourceType: 'charges', chargeId: routeParams.chargeId}, this.formData, function (data) {
                         location.path('/viewloanaccount/' + data.loanId);
                     });
-                }else {
-                                     console.log("else");
+                }else if (scope.action == "reviewapplication") {
+                         resourceFactory.loanDecisionEngineResource.reviewApplication({loanId: routeParams.id}, this.formData, function (data) {
+                             location.path('/viewloanaccount/' + data.loanId);
+                         });
+                }else if (scope.action == "collateralreview") {
+                         resourceFactory.collateralReviewLoanDecisionEngineResource.collateralReview({loanId: routeParams.id}, this.formData, function (data) {
+                             location.path('/viewloanaccount/' + data.loanId);
+                     });
+                }else if (scope.action == "icreviewlevelone") {
+                          resourceFactory.icReviewLevelOneLoanDecisionEngineResource.acceptIcReviewLevelOne({loanId: routeParams.id}, this.formData, function (data) {
+                              location.path('/viewloanaccount/' + data.loanId);
+                  });
+                 }else if (scope.action == "icreviewleveltwo") {
+                        resourceFactory.icReviewLevelTwoLoanDecisionEngineResource.acceptIcReviewLevelTwo({loanId: routeParams.id}, this.formData, function (data) {
+                            location.path('/viewloanaccount/' + data.loanId);
+                });
+                 }else if (scope.action == "icreviewlevelthree") {
+                        resourceFactory.icReviewLevelThreeLoanDecisionEngineResource.acceptIcReviewLevelThree({loanId: routeParams.id}, this.formData, function (data) {
+                           location.path('/viewloanaccount/' + data.loanId);
+                });
+                }else if (scope.action == "icreviewlevelfour") {
+                           resourceFactory.icReviewLevelFourLoanDecisionEngineResource.acceptIcReviewLevelFour({loanId: routeParams.id}, this.formData, function (data) {
+                              location.path('/viewloanaccount/' + data.loanId);
+                   });
+               }else if (scope.action == "icreviewlevelfive") {
+                          resourceFactory.icReviewLevelFiveLoanDecisionEngineResource.acceptIcReviewLevelFive({loanId: routeParams.id}, this.formData, function (data) {
+                             location.path('/viewloanaccount/' + data.loanId);
+                  });
+               }else if (scope.action == "prepareandsigncontract") {
+                          resourceFactory.prepareAndSignContractLoanDecisionEngineResource.acceptPrepareAndSignContract({loanId: routeParams.id}, this.formData, function (data) {
+                             location.path('/viewloanaccount/' + data.loanId);
+                  });
+               } else {
+
                                      params.loanId = scope.accountId;
                                      var allCharges = [];
                                  if(scope.action == "disbursetosavings"){

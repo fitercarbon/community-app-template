@@ -209,6 +209,9 @@
                     clientcollateralTemplateResource: defineResource(apiVer + "/clients/:clientId/collaterals/template", {clientId: '@clientId', prodId: '@prodId'}, {
                         getAllCollaterals: {method: 'GET', params: {prodId: '@prodId'}, isArray: true},
                     }),
+                    clientAdditionalCollateralTemplateResource: defineResource(apiVer + "/clients/:clientId/collaterals/additionalDetailsTemplate", {clientId: '@clientId'}, {
+                        template: {method: 'GET', params: {}},
+                    }),
                     collateralResource: defineResource(apiVer + "/collateral-management/:collateralId", {collateralId: '@collateralId'}, {
                         getAllCollaterals: {method: 'GET', params: {}, isArray: true},
                         get: {method: 'GET', params: {}},
@@ -543,8 +546,8 @@
                         get: {method: 'GET', params: {}},
                         update: {method: 'PUT', params: {}}
                     }),
-                    configurationResourceByName: defineResource(apiVer + "/configurations/", {configName: '@configName'}, {
-                        get: {method: 'GET', params: {configName:'configName'}}
+                    configurationResourceByName: defineResource(apiVer + "/configurations/name/:name", {name: '@name'}, {
+                        get: {method: 'GET', params: {}}
                     }),
                     cacheResource: defineResource(apiVer + "/caches", {}, {
                         get: {method: 'GET', params: {}, isArray: true},
@@ -753,6 +756,54 @@
                     }),
                     clientBusinessDetailTemplate:defineResource(apiVer+"/clients/:clientId/businessDetail/template",{clientId: '@clientId'},{
                        get:{method: 'GET',params:{}}
+                    }),
+                    loanDecisionEngineResource: defineResource(apiVer + "/loans/decision/reviewApplication/:loanId", {loanId: '@loanId'}, {
+                        reviewApplication: {method: 'POST', params: {}},
+                    }),
+                    collateralReviewLoanDecisionEngineResource: defineResource(apiVer + "/loans/decision/collateralReview/:loanId", {loanId: '@loanId'}, {
+                        collateralReview: {method: 'POST', params: {}},
+                    }),
+                    approveDueDiligenceLoanDecisionEngineResource: defineResource(apiVer + "/loans/decision/dueDiligence/:loanId", {loanId: '@loanId'}, {
+                        approveDueDiligence: {method: 'POST', params: {}},
+                    }),
+                    dueDiligenceLoanDecisionEngineResource: defineResource(apiVer + "/loans/decision/template/:loanId", {loanId: '@loanId'}, {
+                        getTemplate: {method: 'GET', params: {}},
+                    }),
+                    addApprovalMatrixEngineResource: defineResource(apiVer + "/loans/decision/approvalMatrix/createApprovalMatrix", {}, {
+                        save: {method: 'POST', params: {}},
+                    }),
+                    getApprovalMatrixEngineTemplateResource: defineResource(apiVer + "/loans/decision/template/approvalMatrix", {}, {
+                        get: {method: 'GET', params: {}},
+                    }),
+                    getAllApprovalMatrixEngineResource: defineResource(apiVer + "/loans/decision/getAllApprovalMatrix", {}, {
+                        getAll: {method: 'GET', params: {},isArray:true},
+                    }),
+                     getAllApprovalMatrixDetailsEngineResource: defineResource(apiVer + "/loans/decision/getApprovalMatrixDetails/:approvalMatrixId",{approvalMatrixId: '@approvalMatrixId'}, {
+                        get: {method: 'GET', params:{}},
+                    }),
+                    deleteApprovalMatrixDetailsEngineResource: defineResource(apiVer + "/loans/decision/approvalMatrix/:approvalMatrixId",{approvalMatrixId: '@approvalMatrixId'}, {
+                        delete: {method: 'DELETE', params:{}},
+                    }),
+                    updateApprovalMatrixDetailsEngineResource: defineResource(apiVer + "/loans/decision/updateApprovalMatrix/:approvalMatrixId",{approvalMatrixId: '@approvalMatrixId'}, {
+                        put: {method: 'PUT', params:{}},
+                    }),
+                    icReviewLevelOneLoanDecisionEngineResource: defineResource(apiVer + "/loans/decision/icReviewDecisionLevelOne/:loanId", {loanId: '@loanId'}, {
+                        acceptIcReviewLevelOne: {method: 'POST', params: {}},
+                    }),
+                    icReviewLevelTwoLoanDecisionEngineResource: defineResource(apiVer + "/loans/decision/icReviewDecisionLevelTwo/:loanId", {loanId: '@loanId'}, {
+                        acceptIcReviewLevelTwo: {method: 'POST', params: {}},
+                    }),
+                    icReviewLevelThreeLoanDecisionEngineResource: defineResource(apiVer + "/loans/decision/icReviewDecisionLevelThree/:loanId", {loanId: '@loanId'}, {
+                        acceptIcReviewLevelThree: {method: 'POST', params: {}},
+                    }),
+                    icReviewLevelFourLoanDecisionEngineResource: defineResource(apiVer + "/loans/decision/icReviewDecisionLevelFour/:loanId", {loanId: '@loanId'}, {
+                        acceptIcReviewLevelFour: {method: 'POST', params: {}},
+                    }),
+                    icReviewLevelFiveLoanDecisionEngineResource: defineResource(apiVer + "/loans/decision/icReviewDecisionLevelFive/:loanId", {loanId: '@loanId'}, {
+                        acceptIcReviewLevelFive: {method: 'POST', params: {}},
+                    }),
+                    prepareAndSignContractLoanDecisionEngineResource: defineResource(apiVer + "/loans/decision/prepareAndSignContract/:loanId", {loanId: '@loanId'}, {
+                        acceptPrepareAndSignContract: {method: 'POST', params: {}},
                     }),
                    provisioningcriteria: defineResource(apiVer + "/provisioningcriteria/:criteriaId",{criteriaId:'@criteriaId'},{
                          get: {method: 'GET',params:{}},

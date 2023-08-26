@@ -62,9 +62,14 @@
                                         "{{client.reopenedBy}}",
                                         "{{client.proposedTransferDate}}",
                                         "{{client.clientCollateralManagements}}"];
+                                        scope.additionalInfo = ["{{activity}}","{{time}}","{{clientId}}","{{loanId}}"];
                 scope.templateEntity = [
                     {"entityName": "Client",
-                        "templateKeys": scope.templateKeys}
+                        "templateKeys": scope.templateKeys
+                    },
+                    {"entityName": "Additional Info",
+                        "templateKeys": scope.additionalInfo
+                    }
                 ];
                 CKEDITOR.instances.templateeditor.setData('');
             };
@@ -73,7 +78,7 @@
                 CKEDITOR.instances.templateeditor.setData('');
                 scope.loanProductTemplateKeys = ["{{loan.loanProduct.fund}}",
                                                 "{{loan.loanProduct.transactionProcessingStrategy}}",
-                                                "{{loan.loanProduct.name}}",
+                                                "{{loan.loanProduct.productName}}",
                                                 "{{loan.loanProduct.shortName}}",
                                                 "{{loan.loanProduct.description}}",
                                                 "{{loan.loanProduct.charges}}",
@@ -244,6 +249,12 @@
                     },
                     {"entityName": "Loan Summary",
                         "templateKeys": scope.loanSummaryTemplateKeys
+                    },
+                    {"entityName": "Client",
+                    "templateKeys": scope.templateKeys
+                    },
+                    {"entityName": "Additional Info",
+                        "templateKeys": scope.additionalInfo
                     }
                 ];
             };

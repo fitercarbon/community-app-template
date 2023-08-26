@@ -1,0 +1,139 @@
+<div class="content-container" ng-controller="ApproveLoanDueDiligenceController">
+    <ul class="breadcrumb">
+        <li ng-show="loandetails.clientName"><a
+                ng-href="#/viewclient/{{loandetails.clientId}}">{{loandetails.clientName}}</a></li>
+        <li ng-show="loandetails.group"><a ng-href="#/viewgroup/{{loandetails.group.id}}">{{loandetails.group.name}}</a></li>
+        <li class="active">{{loandetails.loanProductName}}({{loandetails.accountNo}})</li>
+    </ul>
+    <div class="card">
+        <div class="content">
+        <div class="toolbar">
+            <h4>{{ 'label.heading.addduediligence' | translate }}</h4>
+        </div>
+        <br/>
+        <form name="addduediligenceform" class="form-horizontal" ng-submit="submit()">
+            <api-validate></api-validate>
+            <fieldset>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="surveyName">{{ 'label.input.surveyname' | translate }}<span
+                            class="required">*</span></label>
+
+                    <div class="col-sm-3">
+                        <input id="surveyName" name="surveyName" type="text" class="form-control" ng-model="formData.surveyName" required late-validate>
+                    </div>
+                    
+                    <div class="col-sm-2">
+                        <form-validate valattributeform="addduediligenceform" valattribute="surveyName"/>
+                    </div>
+                
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="startDate">{{ 'label.input.startdate' | translate }}<span
+                            class="required">*</span></label>
+
+                    <div class="col-sm-3">
+                        <input id="startDate" type="text" name="startDate" datepicker-pop="dd MMMM yyyy"
+                               ng-model="first.startDate" is-open="opened" min="'2000-01-01'" max="restrictDate"
+                               class="form-control" />
+                    </div>
+
+                    <div class="col-sm-2">
+                        <form-validate valattributeform="addduediligenceform" valattribute="startDate"/>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="endDate">{{ 'label.input.enddate' | translate }}<span
+                            class="required">*</span></label>
+
+                    <div class="col-sm-3">
+                        <input id="endDate" type="text" name="endDate" datepicker-pop="dd MMMM yyyy"
+                               ng-model="second.endDate" is-open="opened" min="'2000-01-01'" max="restrictDate"
+                               class="form-control" />
+                    </div>
+
+                    <div class="col-sm-2">
+                        <form-validate valattributeform="addduediligenceform" valattribute="endDate"/>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="surveyLocation">{{ 'label.input.surveylocation' | translate }}<span
+                            class="required">*</span></label>
+
+                    <div class="col-sm-3">
+                        <select id="surveyLocation" ng-model="formData.surveyLocation" class="form-control"
+                                ng-options="survey.id as survey.name for survey in surveyLocationOptions"
+                                value="{{survey.id}}"><option value="">--{{'label.menu.surveyLocation' | translate}}--</option></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="cohort">{{ 'label.input.cohort' | translate }}<span
+                            class="required">*</span></label>
+
+                    <div class="col-sm-3">
+                        <select id="cohort" ng-model="formData.cohort" class="form-control"
+                                ng-options="coht.id as coht.name for coht in cohortOptions"
+                                value="{{coht.id}}"><option value="">--{{'label.menu.cohort' | translate}}--</option></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="program">{{ 'label.input.program' | translate }}<span
+                            class="required">*</span></label>
+
+                    <div class="col-sm-3">
+                        <select id="program" ng-model="formData.program" class="form-control"
+                                ng-options="prog.id as prog.name for prog in programOptions"
+                                value="{{prog.id}}"><option value="">--{{'label.menu.program' | translate}}--</option></select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="country">{{ 'label.input.country' | translate }}<span
+                            class="required">*</span></label>
+
+                    <div class="col-sm-3">
+                        <select id="country" ng-model="formData.country" class="form-control"
+                                ng-options="cty.id as cty.name for cty in countryOptions"
+                                value="{{cty.id}}"><option value="">--{{'label.menu.country' | translate}}--</option></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="dueDiligenceOn">{{ 'label.input.approvedondate' | translate }}<span
+                            class="required">*</span></label>
+
+                    <div class="col-sm-3">
+                        <input id="dueDiligenceOn" type="text" name="dueDiligenceOn" datepicker-pop="dd MMMM yyyy"
+                               ng-model="third.dueDiligenceOn" is-open="opened" min="'2000-01-01'" max="restrictDate"
+                               class="form-control" />
+                    </div>
+
+                    <div class="col-sm-2">
+                        <form-validate valattributeform="addduediligenceform" valattribute="dueDiligenceOn"/>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="note">{{ 'label.input.note' | translate }}
+                    <span class="required">*</span></label>
+
+                    <div class="col-sm-3">
+                        <textarea id="note" class="form-control" ng-model="formData.note" rows="4" cols="" required late-validate ></textarea>
+                    </div>
+                </div>
+                <div class="col-md-offset-3">
+                    <button id="cancel" type="reset" class="btn btn-default" ng-click="cancel()">{{ 'label.button.cancel' | translate
+                        }}
+                    </button>
+                    <button id="save" type="submit" has-permission='ACCEPT_DUEDILIGENCE' class="btn btn-primary">{{ 'label.button.save' | translate }}</button>
+                </div>
+
+            </fieldset>
+        </form> 
+        </div>
+    </div>
+</div>

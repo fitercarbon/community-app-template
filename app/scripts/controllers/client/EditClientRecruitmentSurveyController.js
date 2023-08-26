@@ -12,13 +12,14 @@
                 scope.countryOptions = data.countryOptions;
                 scope.cohortOptions = data.cohortOptions;
                 scope.programOptions = data.programOptions;
+                scope.surveyLocationOptions = data.surveyLocationOptions;
 
                 scope.formData = {
                     countryId: data.country.id,
                     cohortId: data.cohort.id,
                     programId: data.program.id,
                     surveyName: data.surveyName,
-                    surveyLocation: data.surveyLocation,
+                    surveyLocationId: data.surveyLocation.id,
                 };
 
                 if (data.startDate) {
@@ -34,7 +35,7 @@
             });
 
             scope.cancel = function () {
-                location.path('/viewclient/' + scope.clientId);
+                location.path('/clientRecruitmentSurvey/' + scope.clientId);
             };
 
             scope.submit = function () {
@@ -43,7 +44,7 @@
                 this.formData.startDate = dateFilter(scope.formData.startDate, scope.df);
                 this.formData.endDate = dateFilter(scope.formData.endDate, scope.df);
                 resourceFactory.clientRecruitmentSurveyResource.put({clientId: scope.clientId, surveyId:scope.surveyId}, this.formData, function (data) {
-                    location.path('/viewclient/' + scope.clientId);
+                    location.path('/clientRecruitmentSurvey/' + scope.clientId);
                 });
             };
 

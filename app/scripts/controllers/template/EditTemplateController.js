@@ -44,11 +44,9 @@
                     }
                 }
 
-                if (data.template.entity == "client") {
+                
                     scope.clientKeys();
-                } else if (data.template.entity == "loan") {
                     scope.loanKeys();
-                }
                 CKEDITOR.instances.templateeditor.insertHtml(data.template.text);
             });
 
@@ -94,10 +92,16 @@
                                             "{{client.reopenedBy}}",
                                             "{{client.proposedTransferDate}}",
                                             "{{client.clientCollateralManagements}}"];
+                                            scope.additionalInfo = ["{{activity}}","{{time}}","{{clientId}}","{{loanId}}"];
                 scope.templateEntity = [
                     {"entityName": "Client",
-                        "templateKeys": scope.clientTemplateKeys}
+                        "templateKeys": scope.clientTemplateKeys
+                    },
+                    {"entityName": "Additional Info",
+                        "templateKeys": scope.additionalInfo
+                    }
                 ];
+                scope.additionalInfo = ["{{activity}}","{{time}}","{{clientId}}","{{loanId}}"];
                 if (scope.templateKeyEntity != "client") {
                     CKEDITOR.instances.templateeditor.setData('');
                 }
@@ -106,7 +110,7 @@
             scope.loanKeys = function () {
                 scope.loanProductTemplateKeys = ["{{loan.loanProduct.fund}}",
                 "{{loan.loanProduct.transactionProcessingStrategy}}",
-                "{{loan.loanProduct.name}}",
+                "{{loan.loanProduct.productName}}",
                 "{{loan.loanProduct.shortName}}",
                 "{{loan.loanProduct.description}}",
                 "{{loan.loanProduct.charges}}",
@@ -277,6 +281,12 @@ scope.loanSummaryTemplateKeys = ["{{loan.summary.totalPrincipalDisbursed}}",
                     },
                     {"entityName": "Loan Summary",
                     "templateKeys": scope.loanSummaryTemplateKeys
+                    },
+                    {"entityName": "Client",
+                        "templateKeys": scope.clientTemplateKeys
+                    },
+                    {"entityName": "Additional Info",
+                        "templateKeys": scope.additionalInfo
                     }
                     ];
                 if (scope.templateKeyEntity != "loan") {
