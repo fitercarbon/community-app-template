@@ -12,13 +12,14 @@
                 scope.countryOptions = data.countryOptions;
                 scope.cohortOptions = data.cohortOptions;
                 scope.programOptions = data.programOptions;
+                scope.surveyLocationOptions = data.surveyLocationOptions;
 
                 scope.formData = {
                     countryId: data.country.id,
                     cohortId: data.cohort.id,
                     programId: data.program.id,
                     surveyName: data.surveyName,
-                    surveyLocation: data.surveyLocation,
+                    surveyLocationId: data.surveyLocation.id,
                 };
 
                 if (data.startDate) {

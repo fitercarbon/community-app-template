@@ -11,6 +11,7 @@
                 scope.countryOptions = data.countryOptions;
                 scope.cohortOptions = data.cohortOptions;
                 scope.programOptions = data.programOptions;
+                scope.surveyLocationOptions = data.surveyLocationOptions;
             });
 
             resourceFactory.recruitmentSurveyResource.getAll({clientId:routeParams.clientId}, function(data){

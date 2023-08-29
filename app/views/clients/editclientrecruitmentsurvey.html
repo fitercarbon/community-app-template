@@ -59,13 +59,15 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="surveyLocation">{{ 'label.input.surveyLocation' | translate }}
+                    <label class="control-label col-sm-2" for="surveyLocationId">{{ 'label.input.surveyLocation' | translate }}
                         <span class="required">*</span></label>
 
                     <div class="col-sm-3">
-                        <input id="surveyLocation" name="surveyLocation" type="text" class="form-control" ng-model="formData.surveyLocation">
+                        <select chosen="surveyLocationOptions" id="surveyLocationId" name="surveyLocationId" ng-model="formData.surveyLocationId" class="form-control"
+                                ng-options="surveyLocation.id as surveyLocation.name for surveyLocation in surveyLocationOptions"
+                                value="{{surveyLocation.id}}" required></select>
                     </div>
-                    <form-validate valattributeform="surveyform" valattribute="surveyLocation"/>
+                    <form-validate valattributeform="surveyform" valattribute="surveyLocationId"/>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="startDate">{{ 'label.input.startDate' | translate }}
