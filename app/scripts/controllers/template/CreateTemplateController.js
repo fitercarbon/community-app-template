@@ -63,7 +63,7 @@
                                         "{{client.reopenedBy}}",
                                         "{{client.proposedTransferDate}}",
                                         "{{client.clientCollateralManagements}}"];
-                                        scope.additionalInfo = ["{{activity}}","{{time}}","{{clientId}}","{{loanId}}", "{{bvn}}"];
+                                        scope.additionalInfo = ["{{activity}}","{{time}}","{{clientId}}","{{loanId}}", "{{bvn}}","{{resourceId}}"];
                 scope.templateEntity = [
                     {"entityName": "Client",
                         "templateKeys": scope.templateKeys
@@ -280,11 +280,49 @@
 
             scope.savingsAccountKeys = function () {
                 scope.templateKeys = ["{{savingsAccount.id}}",
-                                    "{{savingsAccount.client.id}}",
-                                    "{{savingsAccount.accountNumber}}",
-                                    "{{savingsAccount.externalId}}",
-                                    "{{savingsAccount.product.name}}",
-                                    "{{savingsAccount.product.id}}"];
+                "{{savingsAccount.client.id}}",
+                "{{savingsAccount.accountNumber}}",
+                "{{savingsAccount.externalId}}",
+                "{{savingsAccount.product.name}}",
+                "{{savingsAccount.product.id}}",
+                "{{savingsAccount.savingsOfficer}}",
+                "{{savingsAccount.status}}",
+                "{{savingsAccount.sub_status}}",
+                "{{savingsAccount.accountType}}",
+                "{{savingsAccount.submittedOnDate}}",
+                "{{savingsAccount.rejectedOnDate}}",
+                "{{savingsAccount.withdrawnOnDate}}",
+                "{{savingsAccount.withdrawnBy}}",
+                "{{savingsAccount.approvedOnDate}}",
+                "{{savingsAccount.activatedOnDate}}",
+                "{{savingsAccount.activatedBy}}",
+                "{{savingsAccount.closedOnDate}}",
+                "{{savingsAccount.closedBy}}",
+                "{{savingsAccount.reasonForBlock}}",
+                "{{savingsAccount.currency}}",
+                "{{savingsAccount.nominalAnnualInterestRate}}",
+                "{{savingsAccount.interestCompoundingPeriodType}}",
+                "{{savingsAccount.interestPostingPeriodType}}",
+                "{{savingsAccount.interestCalculationType}}",
+                "{{savingsAccount.interestCalculationDaysInYearType}}",
+                "{{savingsAccount.minRequiredOpeningBalance}}",
+                "{{savingsAccount.lockinPeriodFrequency}}",
+                "{{savingsAccount.lockinPeriodFrequencyType}}",
+                "{{savingsAccount.lockedInUntilDate}}",
+                "{{savingsAccount.withdrawalFeeApplicableForTransfer}}",
+                "{{savingsAccount.allowOverdraft}}",
+                "{{savingsAccount.overdraftLimit}}",
+                "{{savingsAccount.nominalAnnualInterestRateOverdraft}}",
+                "{{savingsAccount.minOverdraftForInterestCalculation}}",
+                "{{savingsAccount.postOverdraftInterestOnDeposit}}",
+                "{{savingsAccount.enforceMinRequiredBalance}}",
+                "{{savingsAccount.minRequiredBalance}}",
+                "{{savingsAccount.lienAllowed}}",
+                "{{savingsAccount.maxAllowedLienLimit}}",
+                "{{savingsAccount.onHoldFunds}}",
+                "{{savingsAccount.startInterestCalculationDate}}",
+                "{{savingsAccount.summary}}"
+                ];
 
                 scope.templateEntity = [
                     {
