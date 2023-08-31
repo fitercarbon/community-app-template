@@ -15,6 +15,7 @@
             scope.restrictDate = new Date();
             //this value will be changed within each specific tab
             scope.requestIdentifier = "loanId";
+            scope.isExtendLoanLifeCycleConfig = false;
 
             scope.itemsPerPage = 15;
 
@@ -26,6 +27,100 @@
               });
             };
             scope.rescheduleData();
+            resourceFactory.configurationResourceByName.get({name:'Add-More-Stages-To-A-Loan-Life-Cycle'},function (data) {
+                scope.isExtendLoanLifeCycleConfig = data.enabled;
+            });
+
+            //Review Application
+             scope.loanPendingReviewApplicationData = [];
+             scope.getLoanPendingReviewApplication = function(){
+                     var nextLoanDecisionStateValue = '100'; //100 will be interpreted as null in Backend
+                      resourceFactory.getAllLoansPendingDecisionEngineResource.getAll({nextLoanDecisionState:nextLoanDecisionStateValue}, function (data) {
+                        scope.loanPendingReviewApplicationData = data;
+                      });
+                    };
+            scope.getLoanPendingReviewApplication();
+
+            //Due Diligence
+            scope.loanPendingDueDiligenceData = [];
+            scope.getLoanPendingDueDiligence = function(){
+                     var nextLoanDecisionStateValue = '1000';
+                      resourceFactory.getAllLoansPendingDecisionEngineResource.getAll({nextLoanDecisionState:nextLoanDecisionStateValue}, function (data) {
+                        scope.loanPendingDueDiligenceData = data;
+                      });
+                    };
+            scope.getLoanPendingDueDiligence();
+
+            //Collateral Review
+            scope.loanPendingCollateralReviewData = [];
+            scope.getLoanPendingCollateralReview = function(){
+                     var nextLoanDecisionStateValue = '1200';
+                      resourceFactory.getAllLoansPendingDecisionEngineResource.getAll({nextLoanDecisionState:nextLoanDecisionStateValue}, function (data) {
+                        scope.loanPendingCollateralReviewData = data;
+                      });
+                    };
+            scope.getLoanPendingCollateralReview();
+
+            //IC Review Level One
+            scope.loanPendingIcReviewLevelOneData = [];
+            scope.getLoanPendingIcReviewLevelOne = function(){
+                     var nextLoanDecisionStateValue = '1300';
+                      resourceFactory.getAllLoansPendingDecisionEngineResource.getAll({nextLoanDecisionState:nextLoanDecisionStateValue}, function (data) {
+                        scope.loanPendingIcReviewLevelOneData = data;
+                      });
+                    };
+            scope.getLoanPendingIcReviewLevelOne();
+
+            //IC Review Level Two
+            scope.loanPendingIcReviewLevelTwoData = [];
+            scope.getLoanPendingIcReviewLevelTwo = function(){
+                     var nextLoanDecisionStateValue = '1500';
+                      resourceFactory.getAllLoansPendingDecisionEngineResource.getAll({nextLoanDecisionState:nextLoanDecisionStateValue}, function (data) {
+                        scope.loanPendingIcReviewLevelTwoData = data;
+                      });
+                    };
+            scope.getLoanPendingIcReviewLevelTwo();
+
+            //IC Review Level Three
+            scope.loanPendingIcReviewLevelThreeData = [];
+            scope.getLoanPendingIcReviewLevelThree = function(){
+                     var nextLoanDecisionStateValue = '1600';
+                      resourceFactory.getAllLoansPendingDecisionEngineResource.getAll({nextLoanDecisionState:nextLoanDecisionStateValue}, function (data) {
+                        scope.loanPendingIcReviewLevelThreeData = data;
+                      });
+                    };
+            scope.getLoanPendingIcReviewLevelThree();
+
+            //IC Review Level Four
+            scope.loanPendingIcReviewLevelFourData = [];
+            scope.getLoanPendingIcReviewLevelFour = function(){
+                     var nextLoanDecisionStateValue = '1700';
+                      resourceFactory.getAllLoansPendingDecisionEngineResource.getAll({nextLoanDecisionState:nextLoanDecisionStateValue}, function (data) {
+                        scope.loanPendingIcReviewLevelFourData = data;
+                      });
+                    };
+            scope.getLoanPendingIcReviewLevelFour();
+
+            //IC Review Level Five
+            scope.loanPendingIcReviewLevelFiveData = [];
+            scope.getLoanPendingIcReviewLevelFive = function(){
+                     var nextLoanDecisionStateValue = '1800';
+                      resourceFactory.getAllLoansPendingDecisionEngineResource.getAll({nextLoanDecisionState:nextLoanDecisionStateValue}, function (data) {
+                        scope.loanPendingIcReviewLevelFiveData = data;
+                      });
+                    };
+            scope.getLoanPendingIcReviewLevelFive();
+
+            //Prepare And Sign Contract
+            scope.loanPendingPrepareAndSignContractData = [];
+            scope.getLoanPendingPrepareAndSignContract = function(){
+                     var nextLoanDecisionStateValue = '1900';
+                      resourceFactory.getAllLoansPendingDecisionEngineResource.getAll({nextLoanDecisionState:nextLoanDecisionStateValue}, function (data) {
+                        scope.loanPendingPrepareAndSignContractData = data;
+                      });
+                    };
+            scope.getLoanPendingPrepareAndSignContract();
+
 
             resourceFactory.checkerInboxResource.get({templateResource: 'searchtemplate'}, function (data) {
                 scope.checkerTemplate = data;
