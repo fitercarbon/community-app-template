@@ -805,6 +805,9 @@
                     prepareAndSignContractLoanDecisionEngineResource: defineResource(apiVer + "/loans/decision/prepareAndSignContract/:loanId", {loanId: '@loanId'}, {
                         acceptPrepareAndSignContract: {method: 'POST', params: {}},
                     }),
+                    getAllLoansPendingDecisionEngineResource: defineResource(apiVer + "/loans/decision/getAllLoansPendingDecisionEngine/:nextLoanDecisionState",{nextLoanDecisionState: '@nextLoanDecisionState'}, {
+                        getAll: {method: 'GET', params:{}, isArray : true},
+                    }),
                    provisioningcriteria: defineResource(apiVer + "/provisioningcriteria/:criteriaId",{criteriaId:'@criteriaId'},{
                          get: {method: 'GET',params:{}},
                         getAll: {method: 'GET',params:{}, isArray : true},
