@@ -33,6 +33,26 @@
                            ng-model="formData[modelName]" min="'2000-01-01'" max="restrictDate"/>
                 </div>
             </div>
+            <div class="form-group" ng-show="showRepaymentTable">
+            <div class="form-group float-left">
+                <label class="control-label col-sm-2" for="totalTransactionAmount">{{'label.input.totalTransactionAmount' | translate}}<span
+                        class="required">*</span></label>
+
+                <div class="col-sm-3">
+                    <input id="totalTransactionAmount" type="text"  class="form-control"
+                           ng-model="totalTransactionAmount" ng-change="calculateTotalRepaymentAmount()" number-format/>
+                </div>
+            </div>
+            <div class="form-group float-right">
+                <label class="control-label col-sm-2" for="derivedTotalTransactionAmount">{{'label.input.derivedTotalTransactionAmount' | translate}}<span
+                        class="required">*</span></label>
+
+                <div class="col-sm-3">
+                    <input id="derivedTotalTransactionAmount" type="text"  class="form-control"
+                           ng-model="derivedTotalTransactionAmount" readonly number-format/>
+                </div>
+            </div>
+            </div>
 
             <div class="form-group" ng-show="showvoucherNumberField">
                 <label class="control-label col-sm-2" for="voucherNumber">{{ 'label.input.voucherNumber' | translate}}<span class="required">*</span></label>
@@ -100,7 +120,7 @@
                         </td>
                         <td>
                             <input  type="text" name="repaymentAmount" ng-model="repaymentArray[$index].transactionAmount"
-                                    class="form-control">
+                                    class="form-control" ng-change="calculateTotalRepaymentAmount()" number-format>
                         </td>
 
                     </tr>

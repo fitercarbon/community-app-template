@@ -286,7 +286,7 @@
                     glimLoan: defineResource(apiVer + "/loans/glimAccount/:glimId", {glimId:'@glimId',command: '@command'}, {
                         post: {method: 'POST', params: {}}
                     }),
-                    glimLoanTemplate: defineResource(apiVer + "/loans/glimAccount/:glimId", {glimId:'@glimId'}, {
+                    glimLoanTemplate: defineResource(apiVer + "/loans/glimAccount/:glimId", {glimId:'@glimId',isRepayment: '@isRepayment'}, {
                         get:{method:'GET',params: {},isArray: true}
                     }),
                     LoanEditDisburseResource: defineResource(apiVer + "/loans/:loanId/disbursements/:disbursementId", {loanId: '@loanId', disbursementId: '@disbursementId'}, {

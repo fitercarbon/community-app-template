@@ -8,15 +8,18 @@
             scope.groupGLIMAccounts={};
             scope.productName="";
             scope.buttons={};
+            scope.isExtendLoanLifeCycleConfig = false;
             scope.routeToLoan = function (id) {
                 location.path('/viewloanaccount/' + id);
             };
 
             var parentglimid=0;
 
+            resourceFactory.configurationResourceByName.get({name:'Add-More-Stages-To-A-Loan-Life-Cycle'},function (data) {
+                scope.isExtendLoanLifeCycleConfig = data.enabled;
+            });
 
-
-            resourceFactory.glimLoanTemplate.get({glimId: scope.glimId}, function (data) {
+            resourceFactory.glimLoanTemplate.get({glimId: scope.glimId,isRepayment: false}, function (data) {
 
                 scope.glimAccounts = data;
 
@@ -29,7 +32,7 @@
                     temp.childLoanId=data[i].childLoanId;
                     temp.childLoanAccountNo=data[i].childLoanAccountNo;
                     temp.approvedLoanAmount=parseFloat(data[i].childPrincipalAmount);
-
+                    temp.actualPrincipalAmount=parseFloat(data[i].actualPrincipalAmount);
                     scope.totalLoanAmount+=parseFloat(data[i].childPrincipalAmount);
 
 
