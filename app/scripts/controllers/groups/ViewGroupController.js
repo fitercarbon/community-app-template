@@ -49,7 +49,11 @@
             resourceFactory.runReportsResource.get({reportSource: 'GroupSummaryCounts', genericResultSet: 'false', R_groupId: routeParams.id}, function (data) {
                 scope.summary = data[0];
             });
-            resourceFactory.groupAccountResource.get({groupId: routeParams.id}, function (data) {
+            resourceFactory.groupAccountResource.get({groupId: routeParams.id, fields: "savingsaccounts,grouploanindividualmonitoringaccounts,loanaccounts,memberloanaccounts,membersavingsaccounts,guarantorloanaccounts,memberguarantorloanaccounts"}, function (data) {
+                scope.groupAccounts = data;
+            });
+
+            resourceFactory.groupAccountResource.get({groupId: routeParams.id, fields: "savingsaccounts"}, function (data) {
                 scope.groupAccounts = data;
             });
             resourceFactory.groupNotesResource.getAllNotes({groupId: routeParams.id}, function (data) {

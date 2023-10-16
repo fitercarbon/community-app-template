@@ -813,7 +813,7 @@
                     $uibModalInstance.dismiss('cancel');
                 };
             };
-            resourceFactory.clientAccountResource.get({clientId: routeParams.id}, function (data) {
+            resourceFactory.clientAccountResource.get({clientId: routeParams.id, fields: 'loanaccounts,savingsaccounts'}, function (data) {
                 scope.clientAccounts = data;
                 if(data.loanAccounts){
                     for(var i in data.loanAccounts){
