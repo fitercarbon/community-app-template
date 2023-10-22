@@ -22,7 +22,7 @@
                 });
             };
 
-            resourceFactory.clientResource.getAllClients({clientId : scope.clientId}, function (data) {
+            resourceFactory.clientResource.getAllClients({limit:10, clientId : scope.clientId}, function (data) {
                 scope.displayName = data.displayName;
             });
 
