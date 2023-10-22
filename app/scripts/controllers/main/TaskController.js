@@ -427,7 +427,7 @@
             });
 
 
-            resourceFactory.clientResource.getAllClients({status: 'pending'}, function (data) {
+            resourceFactory.clientResource.getAllClients({limit:50, status: 'pending'}, function (data) {
                 scope.groupedClients = _.groupBy(data.pageItems, "officeName");
             });
 

@@ -31,7 +31,7 @@
 
             scope.clientOptions=function(value){
             var deferred=$q.defer();
-                resourceFactory.clientResource.getAllClientsWithoutLimit({displayName:value, orderBy: 'displayName', officeId:
+                resourceFactory.clientResource.getAllClientsWithoutStatus({limit:10, displayName:value, orderBy: 'displayName', officeId:
                 scope.formData.officeId,sortOrder: 'ASC'},function (data) {
                     deferred.resolve(data.pageItems);
                 });

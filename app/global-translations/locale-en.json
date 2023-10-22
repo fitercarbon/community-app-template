@@ -4945,12 +4945,13 @@
   "label.heading.cell": "Cell",
   "label.heading.village": "Village",
   "label.heading.upiNo" : "UPI No",
-    "label.heading.chassisNo": "Chassis No",
-    "label.heading.collateralOwnerFirst": "Collateral Owner First",
-    "label.heading.idNoOfCollateralOwnerFirst": "First Owner Id",
-    "label.heading.collateralOwnerSecond": "Collateral Owner Second",
-    "label.heading.idNoOfCollateralOwnerSecond": "Second Owner Id",
-    "label.heading.worthOfCollateral": "Worth of Collateral",
+  "label.heading.chassisNo": "Chassis No",
+  "label.heading.collateralOwnerFirst": "Collateral Owner First",
+  "label.heading.idNoOfCollateralOwnerFirst": "First Owner Id",
+  "label.heading.collateralOwnerSecond": "Collateral Owner Second",
+  "label.heading.idNoOfCollateralOwnerSecond": "Second Owner Id",
+  "label.heading.worthOfCollateral": "Worth of Collateral",
+  "label.heading.taxhistory": "Tax History",
 
   "----End---": "--End of file--- "
 }
