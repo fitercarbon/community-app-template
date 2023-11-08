@@ -820,6 +820,10 @@
                         if(data.loanAccounts[i].status.value == "Active" && data.loanAccounts[i].inArrears){
                             scope.clientAccounts.loanAccounts[i].status.value = "Active in Bad Standing"
                         }
+
+                        if(data.loanAccounts[i].timeline.closedOnDate){
+                            scope.clientAccounts.loanAccounts[i].timeline.closedOnDate = new Date(data.loanAccounts[i].timeline.closedOnDate);
+                        }
                     }
                 }
                 if (data.savingsAccounts) {
