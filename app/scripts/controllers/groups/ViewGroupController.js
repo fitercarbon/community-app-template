@@ -51,6 +51,15 @@
             });
             resourceFactory.groupAccountResource.get({groupId: routeParams.id, fields: "savingsaccounts,grouploanindividualmonitoringaccounts,loanaccounts,memberloanaccounts,membersavingsaccounts,guarantorloanaccounts,memberguarantorloanaccounts"}, function (data) {
                 scope.groupAccounts = data;
+                if(data.loanAccounts){
+                    for(var i in data.loanAccounts){
+
+                        if(data.loanAccounts[i].timeline.closedOnDate){
+                            scope.groupAccounts.loanAccounts[i].timeline.closedOnDate = new Date(scope.groupAccounts.loanAccounts[i].timeline.closedOnDate);
+                        }
+                    }
+                }
+
             });
 
             resourceFactory.groupAccountResource.get({groupId: routeParams.id, fields: "savingsaccounts"}, function (data) {
