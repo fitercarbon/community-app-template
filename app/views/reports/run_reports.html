@@ -132,7 +132,10 @@
 
 	    <div data-ng-hide="hideTable">
 	        <div class="pull-right" ng-show="reportType == 'Table'">
-	            <button type="button" class="btn btn-primary" ng-csv="csvData"><i class="fa fa-file "></i>&nbsp;&nbsp;{{'label.button.exportcsv'
+	            <button type="button" class="btn btn-primary" ng-csv="csvData" ><i class="fa fa-file "></i>&nbsp;&nbsp;{{'label.button.exportcsv'
+	                | translate }}
+	            </button>
+				<button type="button" class="btn btn-primary"  ng-click="exportexcel()"><i class="fa fa-file "></i>&nbsp;&nbsp;{{'label.button.exportexcel2'
 	                | translate }}
 	            </button>
 	        </div>
@@ -148,6 +151,26 @@
 	                <tr id="{{$index}}" data-ng-click="highlight($index)" ng-repeat="row in reportData.data track by $index">
 						<td ng-repeat="col in row.row track by $index">
 							<span ng-show="isDecimal($index)">{{col | FormatNumber:decimalsChoice}}</span>
+							<span ng-hide="isDecimal($index)">{{col}}</span>
+						</td>
+	                </tr>
+	                </tbody>
+	            </table>
+
+
+				<!-- Table created and hidden only to be used for export table report into excel Epic INKO-32 
+					original table has two span elements with same data so excel export ends up with duplicated values in each cell.
+					Not sure why we have two spans and purpose so made this work around -->
+				<table ng-hide="true" id="report-export-table" style="width: 1200px;white-space:nowrap" class="table table-bordered" data-anchor>
+	                <thead>
+	                <tr class="graybg">
+	                    <th ng-repeat="columnHeader in reportData.columnHeaders">{{columnHeader.columnName}}</th>
+	                </tr>
+	                </thead>
+	                <tbody>
+	                <!-- http://www.anujgakhar.com/2013/06/15/duplicates-in-a-repeater-are-not-allowed-in-angularjs/ -->
+	                <tr id="{{$index}}" data-ng-click="highlight($index)" ng-repeat="row in reportData.data track by $index">
+						<td ng-repeat="col in row.row track by $index">
 							<span ng-hide="isDecimal($index)">{{col}}</span>
 						</td>
 	                </tr>

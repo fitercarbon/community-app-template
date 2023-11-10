@@ -1,6 +1,6 @@
 (function (module) {
     mifosX.controllers = _.extend(module, {
-        MakeAccountTransferController: function (scope, resourceFactory, location, routeParams, dateFilter) {
+        MakeAccountTransferController: function ($q,scope, resourceFactory, location, routeParams, dateFilter) {
             scope.restrictDate = new Date();
             var params = {fromAccountId: routeParams.accountId};
             var accountType = routeParams.accountType || '';
@@ -41,10 +41,19 @@
                     scope.transfer = data;
                     scope.toOffices = data.toOfficeOptions;
                     scope.toAccountTypes = data.toAccountTypeOptions;
-                    scope.toClients = data.toClientOptions;
+                    // scope.toClients = data.toClientOptions;
                     scope.toAccounts = data.toAccountOptions;
                     scope.formData.transferAmount = data.transferAmount;
                 });
+            };
+
+            scope.toClientOptions = function(value){
+                var deferred = $q.defer();
+                resourceFactory.clientResource.getAllClients({limit:10,status:'active', displayName: value, orderBy : 'displayName', officeId : this.formData.fromOfficeId,
+                sortOrder : 'ASC', orphansOnly : true}, function (data) {
+                    deferred.resolve(data.pageItems);
+                });
+                return deferred.promise;
             };
 
             scope.submit = function () {
@@ -63,7 +72,7 @@
             };
         }
     });
-    mifosX.ng.application.controller('MakeAccountTransferController', ['$scope', 'ResourceFactory', '$location', '$routeParams', 'dateFilter', mifosX.controllers.MakeAccountTransferController]).run(function ($log) {
+    mifosX.ng.application.controller('MakeAccountTransferController', ['$q','$scope', 'ResourceFactory', '$location', '$routeParams', 'dateFilter', mifosX.controllers.MakeAccountTransferController]).run(function ($log) {
         $log.info("MakeAccountTransferController initialized");
     });
 }(mifosX.controllers || {}));

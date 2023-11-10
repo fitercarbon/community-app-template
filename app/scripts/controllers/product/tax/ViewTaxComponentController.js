@@ -4,6 +4,7 @@
 
             resourceFactory.taxcomponent.get({taxComponentId: routeParams.taxComponentId, template: 'true'},function (data) {
                 scope.taxComponent = data;
+                scope.componentHistory = data.taxComponentHistories;
             });
 
         }

@@ -1,6 +1,6 @@
 (function (module) {
     mifosX.controllers = _.extend(module, {
-        CreateStandingInstructionController: function (scope, resourceFactory, location, routeParams, dateFilter) {
+        CreateStandingInstructionController: function ($q,scope, resourceFactory, location, routeParams, dateFilter) {
             scope.restrictDate = new Date();
             var params = {clientId: routeParams.clientId,officeId:routeParams.officeId};
             var accountType = routeParams.accountType || '';
@@ -9,7 +9,6 @@
             else params.fromAccountType = 0;
 
             scope.toOffices = [];
-            scope.toClients = [];
             scope.toAccountTypes = [];
             scope.toAccounts = [];
             scope.destinationOptions = [{id:1,name:'own account'},{id:2,name:'with in bank'}];
@@ -31,10 +30,40 @@
                     scope.standinginstruction = data;
                     scope.toOffices = data.toOfficeOptions;
                     scope.toAccountTypes = data.toAccountTypeOptions;
-                    scope.toClients = data.toClientOptions;
                     scope.toAccounts = data.toAccountOptions;
                     scope.formData.transferAmount = data.transferAmount;
                 });
+            };
+
+            scope.toAccountTypeChange = function () {
+                var fields;
+                if(scope.formData.toAccountType && scope.formData.toAccountType == 2){
+                   fields = 'savingsaccounts';
+                }else if(scope.formData.toAccountType && scope.formData.toAccountType == 1){
+                    fields = 'glimaccounts,guarantorloanaccounts'
+                }
+
+                if(fields && scope.formData.toClientId){
+                    scope.getToAccounts(scope.formData.toClientId,fields).then(function(data){
+                        scope.toAccounts = [];
+                        if(data.savingsAccounts){
+                            scope.toAccounts = data.savingsAccounts;
+                        }
+                        if(data.glimAccounts){
+                            scope.toAccounts = data.glimAccounts;
+                        }
+
+                        if(data.loanAccounts){
+                            scope.toAccounts.push(data.loanAccounts);
+                        }
+                    });
+                }
+
+            }
+
+            scope.changeClient = function (client) {
+                scope.formData.toClientId = client.id;
+                scope.toAccountTypeChange();
             };
 
             scope.changedestination = function () {
@@ -42,7 +71,6 @@
                     scope.allowclientedit = 'false';
                     scope.formData.toOfficeId = scope.formData.fromOfficeId;
                     scope.formData.toClientId = scope.formData.fromClientId;
-                    console.log(scope.formData);
                     scope.changeEvent();
                 }else{
                     scope.allowclientedit = 'true';
@@ -50,6 +78,23 @@
                     scope.formData.toClientId = null;
                 }
             }
+
+            scope.toClientOptions=function(value){
+                var deferred=$q.defer();
+                    resourceFactory.clientResource.getAllClients({limit:10,status: 'active', displayName:value, orderBy: 'displayName', officeId:
+                    scope.formData.officeId,sortOrder: 'ASC'},function (data) {
+                        deferred.resolve(data.pageItems);
+                    });
+                    return deferred.promise;
+                }
+            
+            scope.getToAccounts=function(clientId,fields){
+                var deferred=$q.defer();
+                    resourceFactory.clientAccountResource.getAllAccounts({clientId: clientId, fields: fields},function (data) {
+                        deferred.resolve(data);
+                    });
+                    return deferred.promise;
+                }
 
             scope.submit = function () {
                 this.formData.locale = scope.optlang.code;
@@ -69,7 +114,7 @@
             };
         }
     });
-    mifosX.ng.application.controller('CreateStandingInstructionController', ['$scope', 'ResourceFactory', '$location', '$routeParams', 'dateFilter', mifosX.controllers.CreateStandingInstructionController]).run(function ($log) {
+    mifosX.ng.application.controller('CreateStandingInstructionController', ['$q','$scope', 'ResourceFactory', '$location', '$routeParams', 'dateFilter', mifosX.controllers.CreateStandingInstructionController]).run(function ($log) {
         $log.info("CreateStandingInstructionController initialized");
     });
 }(mifosX.controllers || {}));

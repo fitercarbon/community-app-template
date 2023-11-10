@@ -455,7 +455,7 @@
 											<th>{{'label.heading.closedate' | translate}}</th>
 										</tr>
 										<tr class="pointer-main"
-											ng-repeat="loanaccount in clientAccounts.loanAccounts | orderBy:'id':true | filter:isClosed">
+											ng-repeat="loanaccount in clientAccounts.loanAccounts | orderBy:'timeline.closedOnDate':true | filter:isClosed">
 											<td class="pointer" data-ng-click="routeToLoan(loanaccount.id)">
 												<i uib-tooltip-placement="right" uib-tooltip="{{loanaccount.status.value}}" class="fa fa-stop {{loanaccount.status.code | StatusLookup}}"></i>
 												{{loanaccount.accountNo}}
