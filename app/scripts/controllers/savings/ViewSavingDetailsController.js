@@ -37,7 +37,10 @@
              */
             scope.convertDateArrayToObject = function(dateFieldName){
                 for(var i in scope.savingaccountdetails.transactions){
-                    scope.savingaccountdetails.transactions[i][dateFieldName] = new Date(scope.savingaccountdetails.transactions[i].date);
+                    scope.savingaccountdetails.transactions[i].dateFieldName = new Date(scope.savingaccountdetails.transactions[i].date);
+                    scope.originalDateArray = scope.savingaccountdetails.transactions[i].createdDate;
+                    var createdDate = new Date(scope.originalDateArray[0], scope.originalDateArray[1] - 1, scope.originalDateArray[2], scope.originalDateArray[3], scope.originalDateArray[4], scope.originalDateArray[5]);
+                    scope.savingaccountdetails.transactions[i].createdDate = dateFilter(createdDate, 'dd MMMM yyyy HH:mm:ss');
                 }
             };
             scope.isRecurringCharge = function (charge) {
@@ -166,6 +169,7 @@
                 scope.savingaccountdetails = data;
                 scope.savingaccountdetails.availableBalance = scope.savingaccountdetails.enforceMinRequiredBalance?((!scope.savingaccountdetails.lienAllowed)?(scope.savingaccountdetails.summary.accountBalance - scope.savingaccountdetails.minRequiredBalance):scope.savingaccountdetails.summary.availableBalance):scope.savingaccountdetails.summary.availableBalance;
                 scope.convertDateArrayToObject('date');
+
                 if(scope.savingaccountdetails.groupId) {
                     resourceFactory.groupResource.get({groupId: scope.savingaccountdetails.groupId}, function (data) {
                         scope.groupLevel = data.groupLevel;
