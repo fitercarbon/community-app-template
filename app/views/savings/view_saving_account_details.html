@@ -532,6 +532,9 @@
                                 <th class="pointer" ng-click="changeTransactionSort('date')">
                                     {{'label.heading.transactiondate' | translate}}
                                 </th>
+                                <th class="pointer" ng-click="changeTransactionSort('createdDate')">
+                                    {{'label.heading.createdDate' | translate}}
+                                </th>
                                 <th class="pointer" ng-click="changeTransactionSort('transactionType.value')">
                                     {{'label.heading.transactiontype' | translate}}
                                 </th>
@@ -568,6 +571,10 @@
                                 <td class="pointer"
                                     data-ng-click="routeTo(transaction.accountId,transaction.id,transaction.transfer,transaction.transfer.id,transaction.transactionType.value)">
                                     {{transaction.date | DateFormat}}
+                                </td>
+                                <td class="pointer"
+                                    data-ng-click="routeTo(transaction.accountId,transaction.id,transaction.transfer,transaction.transfer.id,transaction.transactionType.value)">
+                                    {{transaction.createdDate}}
                                 </td>
                                 <td class="pointer"
                                     data-ng-click="routeTo(transaction.accountId,transaction.id,transaction.transfer,transaction.transfer.id,transaction.transactionType.value)">
