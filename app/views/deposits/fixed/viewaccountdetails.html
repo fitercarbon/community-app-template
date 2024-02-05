@@ -370,7 +370,7 @@
                             </td>
                             <td class="pointer"
                                 data-ng-click="routeTo(transaction.accountId,transaction.id,transaction.transfer,transaction.transfer.id)">
-                                {{transaction.createdDate}}
+                                {{transaction.createdDate | DateTimeFormat}}
                             </td>
                             <td class="pointer"
                                 data-ng-click="routeTo(transaction.accountId,transaction.id,transaction.transfer,transaction.transfer.id)">
