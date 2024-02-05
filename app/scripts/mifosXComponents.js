@@ -407,7 +407,8 @@ define(['Q', 'underscore', 'mifosX'], function (Q) {
             'FormatNumber',
             'TranslateDataTableColumn',
             'SearchFilter',
-            'AddUpTotalFor'
+            'AddUpTotalFor',
+            'DateTimeFormat'
         ],
         directives: [
             'DialogDirective',
