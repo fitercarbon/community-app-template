@@ -348,6 +348,7 @@
                         <tr>
                             <th>{{'label.heading.id' | translate}}</th>
                             <th>{{'label.heading.transactiondate' | translate}}</th>
+                            <th>{{'label.heading.createdDate' | translate}}</th>
                             <th>{{'label.heading.transactiontype' | translate}}</th>
                             <th>{{'label.heading.debit' | translate}}</th>
                             <th>{{'label.heading.credit' | translate}}</th>
@@ -366,6 +367,10 @@
                             <td class="pointer"
                                 data-ng-click="routeTo(transaction.accountId,transaction.id,transaction.transfer,transaction.transfer.id)">
                                 {{transaction.date | DateFormat}}
+                            </td>
+                            <td class="pointer"
+                                data-ng-click="routeTo(transaction.accountId,transaction.id,transaction.transfer,transaction.transfer.id)">
+                                {{transaction.createdDate | DateTimeFormat}}
                             </td>
                             <td class="pointer"
                                 data-ng-click="routeTo(transaction.accountId,transaction.id,transaction.transfer,transaction.transfer.id)">

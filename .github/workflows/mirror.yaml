@@ -1,0 +1,36 @@
+name: Mirror to Bitbucket
+
+on:
+  push:
+    branches:
+      - carbon
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Set to 0 for a full clone
+
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.BITBUCKET_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts
+
+      - name: Add Bitbucket Remote
+        run: |
+          git remote add bitbucket git@bitbucket.org:kvpafrica/mifos-frontend-ui.git
+          git fetch --prune bitbucket
+
+      - name: Mirror to Bitbucket
+        run: |
+          git config pull.rebase true
+          git config --global user.email "devops@fiter.io"
+          git config --global user.name "Devops"
+          git pull bitbucket carbon
+          git push bitbucket carbon

@@ -4953,6 +4953,7 @@
   "label.heading.idNoOfCollateralOwnerSecond": "Second Owner Id",
   "label.heading.worthOfCollateral": "Worth of Collateral",
   "label.heading.taxhistory": "Tax History",
+  "label.heading.createdDate": "Created Date",
 
   "----End---": "--End of file--- "
 }
