@@ -12,7 +12,6 @@
             scope.loandetails = [];
 
             scope.routeTo = function (loanId, transactionId, transactionTypeId) {
-                console.log("transactionTypeId: " + transactionTypeId);
                 if (transactionTypeId == 2 || transactionTypeId == 4 || transactionTypeId == 1
                     || transactionTypeId == 8) {
                     $rootScope.rates = scope.loandetails.rates;
