@@ -2,6 +2,7 @@
     mifosX.services = _.extend(module, {
         ResourceFactoryProvider: function () {
             var baseUrl = "" , apiVer = "/fineract-provider/api/v1", tenantIdentifier = "";
+            const reportsUrl = "http://44.233.46.113:8080";
             this.setBaseUrl = function (url) {
                 baseUrl = url;
                 console.log(baseUrl);
@@ -15,6 +16,7 @@
                     var tempUrl = baseUrl;
                     $rootScope.hostUrl = tempUrl;
                     $rootScope.tenantIdentifier = tenantIdentifier;
+                    $rootScope.reportsUrl = reportsUrl;
                     return resource(baseUrl + url, paramDefaults, actions);
                 };
                 return {

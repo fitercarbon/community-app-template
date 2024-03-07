@@ -539,7 +539,7 @@
                 scope.hidePentahoReport = true;
                 scope.formData.outputType = 'PDF';
 
-                 var reportURL = $rootScope.hostUrl + API_VERSION + "/runreports/" + encodeURIComponent("Client Saving Transactions");
+                 var reportURL = $rootScope.reportsUrl + API_VERSION + "/runreports/" + encodeURIComponent("Client Saving Transactions");
                  reportURL += "?output-type=" + encodeURIComponent(scope.formData.outputType) + "&tenantIdentifier=" + $rootScope.tenantIdentifier+"&locale="+scope.optlang.code;
 
                 var reportParams = "";
