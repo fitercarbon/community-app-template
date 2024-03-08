@@ -2,7 +2,7 @@
     mifosX.services = _.extend(module, {
         ResourceFactoryProvider: function () {
             var baseUrl = "" , apiVer = "/fineract-provider/api/v1", tenantIdentifier = "";
-            const reportsUrl = "http://44.233.46.113:8080";
+            const reportsUrl = "https://prod-mifos-jobs.getcarbon.co";
             this.setBaseUrl = function (url) {
                 baseUrl = url;
                 console.log(baseUrl);
