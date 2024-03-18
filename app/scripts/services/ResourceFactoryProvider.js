@@ -19,6 +19,13 @@
                     $rootScope.reportsUrl = reportsUrl;
                     return resource(baseUrl + url, paramDefaults, actions);
                 };
+                var defineReportResource = function (url, paramDefaults, actions) {
+                    var tempUrl = reportsUrl;
+                    $rootScope.hostUrl = tempUrl;
+                    $rootScope.tenantIdentifier = tenantIdentifier;
+                    $rootScope.reportsUrl = reportsUrl;
+                    return resource(reportsUrl + url, paramDefaults, actions);
+                };
                 return {
                     userResource: defineResource(apiVer + "/users/:userId", {userId: '@userId'}, {
                         getAllUsers: {method: 'GET', params: {fields: "id,firstname,lastname,username,officeName"}, isArray: true},
@@ -143,7 +150,7 @@
                     groupClients: defineResource(apiVer + "/groups/:groupId", {groupId: '@groupId', associations: '@associations'}, {
                         get:{method:'GET',params: {}}
                     }),
-                    groupSummaryResource: defineResource(apiVer + "/runreports/:reportSource", {reportSource: '@reportSource'}, {
+                    groupSummaryResource: defineReportResource(apiVer + "/runreports/:reportSource", {reportSource: '@reportSource'}, {
                         getSummary: {method: 'GET', params: {}}
                     }),
                     groupAccountResource: defineResource(apiVer + "/groups/:groupId/accounts", {groupId: '@groupId', fields: '@fields'}, {
@@ -170,11 +177,11 @@
                         templateSource: '@templateSource'}, {
                         update: {method: 'PUT'}
                     }),
-                    runReportsResource: defineResource(apiVer + "/runreports/:reportSource", {reportSource: '@reportSource'}, {
+                    runReportsResource: defineReportResource(apiVer + "/runreports/:reportSource", {reportSource: '@reportSource'}, {
                         get: {method: 'GET', params: {}, isArray: true},
                         getReport: {method: 'GET', params: {}}
                     }),
-                    reportsResource: defineResource(apiVer + "/reports/:id/:resourceType", {id: '@id', resourceType: '@resourceType'}, {
+                    reportsResource: defineReportResource(apiVer + "/reports/:id/:resourceType", {id: '@id', resourceType: '@resourceType'}, {
                         get: {method: 'GET', params: {id: '@id'}},
                         getReport: {method: 'GET', params: {id: '@id'}, isArray: true},
                         getReportDetails: {method: 'GET', params: {id: '@id'}},
