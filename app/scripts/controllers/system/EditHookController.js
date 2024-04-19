@@ -68,13 +68,15 @@
             }
 
             scope.submit = function () {
-                this.formData.name = scope.template.name;
+                if (scope.template){
+                    this.formData.name = scope.template.name;
+                }
                 this.formData.config = {};
                 this.formData.events = scope.events;
                 if (scope.ugdTemplate !== null) {
                     this.formData.templateId = scope.ugdTemplate.id;
                 }
-                if (scope.template.schema.length > 0) {
+                if (scope.template && scope.template.schema.length > 0) {
                     for (var i in scope.template.schema) {
                         this.formData.config[scope.template.schema[i].fieldName] = scope.schemaInputs[i];
                     }
