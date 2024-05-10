@@ -1,7 +1,7 @@
 (function(mifosX) {
     var defineHeaders = function($httpProvider, $translateProvider, ResourceFactoryProvider, HttpServiceProvider, $idleProvider, $keepaliveProvider, IDLE_DURATION, WARN_DURATION, KEEPALIVE_INTERVAL, FINERACT_BASE_URL) {
         var mainLink = getLocation(window.location.href);
-        var baseApiUrl = "https://prod-mifos-backend.getcarbon.co/";
+        var baseApiUrl = " https://cba-prod-eks.getcarbon.co/";
         var host = "";
         var portNumber = "";
         //accessing from openmf server
