@@ -3,7 +3,7 @@ name: Mirror to Bitbucket
 on:
   push:
     branches:
-      - carbon
+      - prod
 
 jobs:
   mirror:
@@ -32,5 +32,5 @@ jobs:
           git config pull.rebase true
           git config --global user.email "devops@fiter.io"
           git config --global user.name "Devops"
-          git pull bitbucket carbon
-          git push bitbucket carbon
+          git pull bitbucket prod
+          git push bitbucket prod
