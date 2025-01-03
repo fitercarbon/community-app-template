@@ -1702,6 +1702,7 @@
   "label.button.Guarantor": "Guarantor",
   "label.button.undodisbursal": "Undo Disbursal",
   "label.button.makerepayment": "Make Repayment",
+  "label.button.reprocessbalances": "Reprocess Balances",
   "label.button.waiveinterest": "Waive Interest",
   "label.button.writeoff": "Write-Off",
   "label.button.close-rescheduled": "Close (as Rescheduled)",
