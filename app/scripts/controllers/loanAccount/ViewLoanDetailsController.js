@@ -141,22 +141,37 @@
                     case "icreviewlevelone":
                         location.path('/loanaccount/' + accountId + '/icreviewlevelone');
                         break;
-                     case "icreviewleveltwo":
+                    case "icreviewleveltwo":
                          location.path('/loanaccount/' + accountId + '/icreviewleveltwo');
                          break;
-                     case "icreviewlevelthree":
+                    case "icreviewlevelthree":
                           location.path('/loanaccount/' + accountId + '/icreviewlevelthree');
                           break;
-                     case "icreviewlevelfour":
+                    case "icreviewlevelfour":
                           location.path('/loanaccount/' + accountId + '/icreviewlevelfour');
                           break;
-                     case "icreviewlevelfive":
+                    case "icreviewlevelfive":
                           location.path('/loanaccount/' + accountId + '/icreviewlevelfive');
                           break;
-                      case "prepareandsigncontract":
+                    case "prepareandsigncontract":
                           location.path('/loanaccount/' + accountId + '/prepareandsigncontract');
                           break;
+                    case "reprocessbalances":
+                          scope.reprocessBalances();
+                          break;
                 }
+            };
+
+            scope.reprocessBalances = function (id) {
+                $uibModal.open({
+                    templateUrl: 'reprocessBalances.html',
+                    controller: ReprocessBalancesCtrl,
+                    resolve: {
+                        ids: function () {
+                            return id;
+                        }
+                    }
+                });
             };
 
             scope.delCharge = function (id) {
@@ -171,6 +186,19 @@
                 });
             };
 
+            var ReprocessBalancesCtrl = function ($scope, $uibModalInstance) {
+                $scope.reprocess = function () {
+                    var params = {command: "reprocessBalances", loanId: routeParams.id};
+
+                    resourceFactory.LoanAccountResource.save(params, this.formData, function (data) {
+                        $uibModalInstance.close('reprocess');
+                        route.reload();
+                    });
+                };
+                $scope.cancel = function () {
+                    $uibModalInstance.dismiss('cancel');
+                };
+            };
             var DelChargeCtrl = function ($scope, $uibModalInstance, ids) {
                 $scope.delete = function () {
                     resourceFactory.LoanAccountResource.delete({loanId: routeParams.id, resourceType: 'charges', chargeId: ids}, {}, function (data) {
@@ -407,6 +435,11 @@
                             name: "button.makerepayment",
                             icon: "fa fa-dollar",
                             taskPermissionName: 'REPAYMENT_LOAN'
+                        },
+                        {
+                            name: "button.reprocessbalances",
+                            icon: "fa fa-refresh",
+                            taskPermissionName: 'REPROCESS_LOAN_BALANCES'
                         },
                         {
                             name: "button.undodisbursal",
